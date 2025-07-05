@@ -123,7 +123,7 @@ Abre um shell interativo no container `maquina2` como usuário `postgres`.
 
 ---
 
-## ✅ To-do após subir o ambiente
+## 📂 Processo de backup
 
 1. Execute:
 
@@ -173,16 +173,35 @@ Abre um shell interativo no container `maquina2` como usuário `postgres`.
 
    para verificar o status do backup.
 
-7. Acesse o Grafana em: [http://localhost:3000](http://localhost:3000)
+7. Execute:
+
+   ```bash
+   docker exec -u postgres maquina1 systemctl stop postgresql
+   docker exec -u postgres maquina1 pgbackrest --stanza=maquina1 --target-time="2025-07-05 15:01:33-03" --type=time   restore
+   docker exec -u postgres maquina1 systemctl start postgresql
+   ```
+
+   para realizar o restore do backup.
+
+## 🧑‍💻 Processo de monitoramento
+
+1. Acesse o Grafana em: [http://localhost:3000](http://localhost:3000)
 
    * Usuário padrão: `admin`
    * Senha padrão: `senha`
 
-8. Verifique os logs do PostgreSQL se houver falhas no `pgBackRest`:
+2. Verifique os logs do PostgreSQL se houver falhas no `pgBackRest`:
 
    ```bash
    docker exec maquina1 tail -f /var/lib/postgresql/log/postgresql.log
    ```
 
    ou acesse direto pelo na pasta `maquina1/log`
+
+## 🧑‍💻 Processo de carga de dados pelo pgloader
+
+   ```bash
+   cd pglaoder
+   bash run.sh
+   ```
 
