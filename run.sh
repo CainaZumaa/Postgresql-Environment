@@ -1,35 +1,37 @@
 #!/bin/bash
 
+export AIRFLOW_UID=$(id -u)
+
 build(){
-    docker-compose build --no-cache --memory 4g --progress=plain;
+    docker compose build --no-cache --memory 4g --progress=plain;
 }
 
 up(){
-    docker-compose up -d;
+    docker compose up -d;
 }
 
 stop(){
-    docker-compose down;
+    docker compose down;
 }
 
 drop(){
-    docker-compose down;
+    docker compose down;
 }
 
 restart(){
-    docker-compose down && docker-compose up -d
+    docker compose down && docker compose up -d
 }
 
 drop_hard(){
-    docker-compose down --volumes --remove-orphans --rmi all;
-    # docker stop $(docker ps -aq);
+    docker compose down --volumes --remove-orphans --rmi all;
+    docker stop $(docker ps -aq);
     docker builder prune --all --force;
     sudo rm -rf ./maquina1/data ./maquina1/log;
-    # docker rm $(docker ps -aq);
-    # docker rmi -f $(docker images -aq);
-    # docker volume rm $(docker volume ls -q);
-    sudo rm -rf ./maquina2/data ./maquina2/log;
-    # docker network rm $(docker network ls -q | grep -vE '^(bridge|host|none)$');
+    docker rm $(docker ps -aq);
+    docker rmi -f $(docker images -aq);
+    docker volume rm $(docker volume ls -q);
+    sudo rm -rf ./maquina2/data ./maquina2/log ./dw/data ./dw/log ./dbt/data ./dbt/.dbt ./airflow/dags ./airflow/logs ./airflow/config ./airflow/plugins;
+    docker network rm $(docker network ls -q | grep -vE '^(bridge|host|none)$');
 }
 
 cpKeys(){
@@ -55,11 +57,11 @@ cpKeys(){
 }
 
 bashMaquina2(){
-    docker-compose exec -u postgres maquina2 bash
+    docker compose exec -u postgres maquina2 bash
 }
 
 bashMaquina1(){
-    docker-compose exec -u postgres maquina1 bash
+    docker compose exec -u postgres maquina1 bash
 }
 
 $1

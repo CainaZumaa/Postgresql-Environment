@@ -1,0 +1,47 @@
+FROM postgres:17-bullseye
+WORKDIR /var/lib/postgresql
+
+ENV PGDATA="/var/lib/postgresql/data/pgdata"
+ENV POSTGRES_PASSWORD="postgres"
+ENV POSTGRES_INITDB_ARGS="--auth-host=scram-sha-256"
+ENV POSTGRES_DB="dw"
+ENV TZ="America/Bahia"
+ENV PGTZ="America/Bahia"
+ENV PGPORT="5432"
+ENV PGBACKREST_CONFIG="/var/lib/postgresql/pgbackrest.conf"
+
+RUN apt-get update -y && apt-get install -y curl gnupg lsb-release sudo openssh-server gosu cron nano tzdata && rm -rf /var/lib/apt/lists/*
+
+ADD --chown=postgres:postgres relacional.sql /docker-entrypoint-initdb.d/relacional.sql
+
+# Entrypoint Custom
+RUN cat > /usr/local/bin/docker-entrypoint-custom.sh <<EOF
+#!/bin/bash
+set -e
+
+# Garantir arquivo de log
+mkdir -p /var/lib/postgresql/log && touch /var/lib/postgresql/log/postgresql-dw.log && chmod 777 -R /var/lib/postgresql/log
+
+# Iniciar Posttgreql
+/usr/local/bin/docker-entrypoint.sh postgres \
+-c logging_collector=on \
+-c log_directory='/var/lib/postgresql/log' \
+-c log_filename='postgresql-dw.log' \
+-c log_statement='all' "\$@" &
+
+# Garantir permissoes
+chown -R postgres:postgres /var/lib/postgresql
+
+# Monitorar logs
+tail -f /var/lib/postgresql/log/postgresql-dw.log
+
+EOF
+
+RUN mkdir -p /var/lib/postgresql/log && \
+    touch /var/lib/postgresql/log/postgresql-dw.log && \
+    chown -R postgres:postgres /var/lib/postgresql
+
+USER root
+
+ENTRYPOINT [ "/bin/bash", "/usr/local/bin/docker-entrypoint-custom.sh" ]
+

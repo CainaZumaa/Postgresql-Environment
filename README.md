@@ -36,6 +36,7 @@ Este projeto levanta um ambiente completo com:
 
 ### `./run.sh build`
 
+O serviço deve ser buildado dessa forma, caso contrário o airflow, não irá funcionar. O bash exporta uma variável que é utilizada por ele.
 Faz o build das imagens com cache desabilitado e limite de memória:
 
 ```bash
@@ -141,15 +142,8 @@ Abre um shell interativo no container `maquina2` como usuário `postgres`.
 
    para criar pasta dedicada para o backup no servidor de backup `maquina2`.
 
+
 3. Execute:
-
-   ```bash
-   ./run.sh restart
-   ```
-
-   para reiniciar os serviços.
-
-4. Execute:
 
    ```bash
    docker exec -u postgres maquina1 pgbackrest --stanza=maquina1 check
@@ -157,7 +151,7 @@ Abre um shell interativo no container `maquina2` como usuário `postgres`.
 
    para testar a comunicação SSH entre as máquinas.
 
-5. Execute:
+4. Execute:
 
    ```bash
    docker exec -u postgres maquina1 pgbackrest --stanza=maquina1 --type=full backup
@@ -165,7 +159,7 @@ Abre um shell interativo no container `maquina2` como usuário `postgres`.
 
    para realizar o primeiro backup completo.
 
-6. Execute:
+5. Execute:
 
    ```bash
    docker exec -u postgres maquina1 pgbackrest --stanza=maquina1 info
@@ -173,24 +167,23 @@ Abre um shell interativo no container `maquina2` como usuário `postgres`.
 
    para verificar o status do backup.
 
-7. Execute:
+6. Execute:
 
    ```bash
-   docker exec -u postgres maquina1 systemctl stop postgresql
-   docker exec -u postgres maquina1 pgbackrest --stanza=maquina1 --target-time="2025-07-05 15:01:33-03" --type=time   restore
-   docker exec -u postgres maquina1 systemctl start postgresql
+   docker exec -u postgres maquina1 pg_ctl stop -D /var/lib/postgresql/data/pgdata
+   docker exec -u root maquina1 rm -rf /var/lib/postgresql/data/pgdata
+   docker exec -u root maquina1 ls /var/lib/postgresql/data/pgdata   --> o caminho não pode existir, deletamos todos o banco
+   docker exec -u postgres maquina1 pgbackrest --stanza=maquina1 --type=time --target="2025-07-06 11:17:09-04" --delta restore
+   docker exec -u root maquina1 chown -R postgres:postgres /var/lib/postgresql/data/pgdata
+   docker exec -u root maquina1 chmod 750 /var/lib/postgresql/data/pgdata
+   bash run.sh restart
    ```
 
    para realizar o restore do backup.
 
-## 🧑‍💻 Processo de monitoramento
+   ⚠️ **Atenção:** Para ver os arquivos é necessários executar o comando para ter permissão. sudo chmod 777 ./ -R
 
-1. Acesse o Grafana em: [http://localhost:3000](http://localhost:3000)
-
-   * Usuário padrão: `admin`
-   * Senha padrão: `senha`
-
-2. Verifique os logs do PostgreSQL se houver falhas no `pgBackRest`:
+8. Verifique os logs do PostgreSQL se houver falhas no `pgBackRest`:
 
    ```bash
    docker exec maquina1 tail -f /var/lib/postgresql/log/postgresql.log
@@ -198,10 +191,23 @@ Abre um shell interativo no container `maquina2` como usuário `postgres`.
 
    ou acesse direto pelo na pasta `maquina1/log`
 
-## 🧑‍💻 Processo de carga de dados pelo pgloader
+## 🧑‍💻 Processo de monitoramento
+
+1. Acesse o Grafana em: [http://localhost:3000](http://localhost:4000)
+
+   * Usuário padrão: `admin`
+   * Senha padrão: `senha`
+
+   exemplo de dash: https://grafana.com/grafana/dashboards/9628-postgresql-database/
+
+
+## 📂➡️📤 Processo de carga de dados pelo pgloader
+
+1. Lembre-se de colocar o arquivo .sqlite que será importado dentro da pasta pgloader
 
    ```bash
    cd pglaoder
    bash run.sh
    ```
 
+## 📥 ➡️ 🔄 ➡️ 📤 Processo de ETL com Airflow + dbt

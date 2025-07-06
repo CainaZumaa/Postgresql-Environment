@@ -1,0 +1,10 @@
+BEGIN;
+
+CREATE TABLE clientes (
+    id SERIAL CONSTRAINT pk_clientes PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE,
+    data_cadastro DATE DEFAULT CURRENT_DATE
+);
+
+COMMIT;

@@ -58,7 +58,7 @@ RUN mkdir -p /var/lib/postgresql/.ssh \
     && chown -R postgres:postgres /var/lib/postgresql \
     && chmod 700 /var/lib/postgresql/.ssh \
     && chmod 600 /var/lib/postgresql/.ssh/*
-    
+
     # && cat /var/lib/postgresql/.ssh/id_rsa.pub > /var/lib/postgresql/.ssh/authorized_keys \
 
 # Confs SSH
@@ -115,10 +115,7 @@ cron
 
 # Iniciar Posttgreql
 /usr/local/bin/docker-entrypoint.sh postgres \
--c logging_collector=on \
--c log_directory='/var/lib/postgresql/log' \
--c log_filename='postgresql-maquina1.log' \
--c log_statement='all' "\$@" &
+-c config_file=/var/lib/postgresql/data/postgresql.conf &
 
 # Garantir permissoes
 chown -R postgres:postgres /var/lib/postgresql

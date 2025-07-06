@@ -1,0 +1,161 @@
+ccl.latest: Pulling from dimitri/pgloader
+59ce1b6c0c82: Pulling fs layer
+69788ce58f29: Pulling fs layer
+097daea1c5b5: Pulling fs layer
+59ce1b6c0c82: Download complete
+69788ce58f29: Verifying Checksum
+69788ce58f29: Download complete
+097daea1c5b5: Verifying Checksum
+097daea1c5b5: Download complete
+59ce1b6c0c82: Pull complete
+69788ce58f29: Pull complete
+097daea1c5b5: Pull complete
+Digest: sha256:f6ab423661145fe71be3edec2cec4341facc88c5ce52d755a2d6f3ae73614c0b
+Status: Downloaded newer image for dimitri/pgloader:ccl.latest
+docker.io/dimitri/pgloader:ccl.latest
+cc4d360d51cba98f724ceaf0885ff70776d87e0fa9a620d1d8d98d031db0efc6
+2025-07-05T18:24:37.001924Z LOG pgloader version "3.6.7~devel"
+2025-07-05T18:24:38.275211Z LOG Migrating from #<SQLITE-CONNECTION sqlite:///data/base.sqlite #x3020020922DD>
+2025-07-05T18:24:38.275677Z LOG Migrating into #<PGSQL-CONNECTION pgsql://postgres@localhost:15432/postgres #x30200209218D>
+2025-07-05T18:27:17.750803Z ERROR PostgreSQL Database error 42830: there is no unique constraint matching given keys for referenced table "ball_by_ball"
+QUERY: ALTER TABLE extra_runs ADD FOREIGN KEY(Innings_No) REFERENCES ball_by_ball(Over_Id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-05T18:27:17.778037Z ERROR PostgreSQL Database error 42830: there is no unique constraint matching given keys for referenced table "ball_by_ball"
+QUERY: ALTER TABLE extra_runs ADD FOREIGN KEY(Ball_Id) REFERENCES ball_by_ball(Over_Id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-05T18:27:17.797652Z ERROR PostgreSQL Database error 42830: there is no unique constraint matching given keys for referenced table "ball_by_ball"
+QUERY: ALTER TABLE extra_runs ADD FOREIGN KEY(Over_Id) REFERENCES ball_by_ball(Over_Id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-05T18:27:17.820142Z ERROR PostgreSQL Database error 42830: there is no unique constraint matching given keys for referenced table "ball_by_ball"
+QUERY: ALTER TABLE extra_runs ADD FOREIGN KEY(Match_Id) REFERENCES ball_by_ball(Over_Id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-05T18:27:17.841061Z ERROR PostgreSQL Database error 42830: there is no unique constraint matching given keys for referenced table "ball_by_ball"
+QUERY: ALTER TABLE extra_runs ADD FOREIGN KEY(Innings_No) REFERENCES ball_by_ball(Match_Id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-05T18:27:17.870534Z ERROR PostgreSQL Database error 42830: there is no unique constraint matching given keys for referenced table "ball_by_ball"
+QUERY: ALTER TABLE extra_runs ADD FOREIGN KEY(Ball_Id) REFERENCES ball_by_ball(Match_Id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-05T18:27:17.890221Z ERROR PostgreSQL Database error 42830: there is no unique constraint matching given keys for referenced table "ball_by_ball"
+QUERY: ALTER TABLE extra_runs ADD FOREIGN KEY(Over_Id) REFERENCES ball_by_ball(Match_Id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-05T18:27:17.920021Z ERROR PostgreSQL Database error 42830: there is no unique constraint matching given keys for referenced table "ball_by_ball"
+QUERY: ALTER TABLE extra_runs ADD FOREIGN KEY(Match_Id) REFERENCES ball_by_ball(Match_Id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-05T18:27:17.939039Z ERROR PostgreSQL Database error 42830: there is no unique constraint matching given keys for referenced table "ball_by_ball"
+QUERY: ALTER TABLE extra_runs ADD FOREIGN KEY(Innings_No) REFERENCES ball_by_ball(Innings_No) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-05T18:27:17.959722Z ERROR PostgreSQL Database error 42830: there is no unique constraint matching given keys for referenced table "ball_by_ball"
+QUERY: ALTER TABLE extra_runs ADD FOREIGN KEY(Ball_Id) REFERENCES ball_by_ball(Innings_No) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-05T18:27:17.980213Z ERROR PostgreSQL Database error 42830: there is no unique constraint matching given keys for referenced table "ball_by_ball"
+QUERY: ALTER TABLE extra_runs ADD FOREIGN KEY(Over_Id) REFERENCES ball_by_ball(Innings_No) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-05T18:27:18.001696Z ERROR PostgreSQL Database error 42830: there is no unique constraint matching given keys for referenced table "ball_by_ball"
+QUERY: ALTER TABLE extra_runs ADD FOREIGN KEY(Match_Id) REFERENCES ball_by_ball(Innings_No) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-05T18:27:18.021977Z ERROR PostgreSQL Database error 42830: there is no unique constraint matching given keys for referenced table "ball_by_ball"
+QUERY: ALTER TABLE extra_runs ADD FOREIGN KEY(Innings_No) REFERENCES ball_by_ball(Ball_Id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-05T18:27:18.039518Z ERROR PostgreSQL Database error 42830: there is no unique constraint matching given keys for referenced table "ball_by_ball"
+QUERY: ALTER TABLE extra_runs ADD FOREIGN KEY(Ball_Id) REFERENCES ball_by_ball(Ball_Id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-05T18:27:18.054274Z ERROR PostgreSQL Database error 42830: there is no unique constraint matching given keys for referenced table "ball_by_ball"
+QUERY: ALTER TABLE extra_runs ADD FOREIGN KEY(Over_Id) REFERENCES ball_by_ball(Ball_Id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-05T18:27:18.068389Z ERROR PostgreSQL Database error 42830: there is no unique constraint matching given keys for referenced table "ball_by_ball"
+QUERY: ALTER TABLE extra_runs ADD FOREIGN KEY(Match_Id) REFERENCES ball_by_ball(Ball_Id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-05T18:27:18.083000Z ERROR PostgreSQL Database error 42830: there is no unique constraint matching given keys for referenced table "ball_by_ball"
+QUERY: ALTER TABLE batsman_scored ADD FOREIGN KEY(Innings_No) REFERENCES ball_by_ball(Over_Id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-05T18:27:18.103139Z ERROR PostgreSQL Database error 42830: there is no unique constraint matching given keys for referenced table "ball_by_ball"
+QUERY: ALTER TABLE batsman_scored ADD FOREIGN KEY(Ball_Id) REFERENCES ball_by_ball(Over_Id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-05T18:27:18.135997Z ERROR PostgreSQL Database error 42830: there is no unique constraint matching given keys for referenced table "ball_by_ball"
+QUERY: ALTER TABLE batsman_scored ADD FOREIGN KEY(Over_Id) REFERENCES ball_by_ball(Over_Id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-05T18:27:18.175884Z ERROR PostgreSQL Database error 42830: there is no unique constraint matching given keys for referenced table "ball_by_ball"
+QUERY: ALTER TABLE batsman_scored ADD FOREIGN KEY(Match_Id) REFERENCES ball_by_ball(Over_Id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-05T18:27:18.197166Z ERROR PostgreSQL Database error 42830: there is no unique constraint matching given keys for referenced table "ball_by_ball"
+QUERY: ALTER TABLE batsman_scored ADD FOREIGN KEY(Innings_No) REFERENCES ball_by_ball(Match_Id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-05T18:27:18.227382Z ERROR PostgreSQL Database error 42830: there is no unique constraint matching given keys for referenced table "ball_by_ball"
+QUERY: ALTER TABLE batsman_scored ADD FOREIGN KEY(Ball_Id) REFERENCES ball_by_ball(Match_Id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-05T18:27:18.249603Z ERROR PostgreSQL Database error 42830: there is no unique constraint matching given keys for referenced table "ball_by_ball"
+QUERY: ALTER TABLE batsman_scored ADD FOREIGN KEY(Over_Id) REFERENCES ball_by_ball(Match_Id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-05T18:27:18.276536Z ERROR PostgreSQL Database error 42830: there is no unique constraint matching given keys for referenced table "ball_by_ball"
+QUERY: ALTER TABLE batsman_scored ADD FOREIGN KEY(Match_Id) REFERENCES ball_by_ball(Match_Id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-05T18:27:18.313297Z ERROR PostgreSQL Database error 42830: there is no unique constraint matching given keys for referenced table "ball_by_ball"
+QUERY: ALTER TABLE batsman_scored ADD FOREIGN KEY(Innings_No) REFERENCES ball_by_ball(Innings_No) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-05T18:27:18.353686Z ERROR PostgreSQL Database error 42830: there is no unique constraint matching given keys for referenced table "ball_by_ball"
+QUERY: ALTER TABLE batsman_scored ADD FOREIGN KEY(Ball_Id) REFERENCES ball_by_ball(Innings_No) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-05T18:27:18.379549Z ERROR PostgreSQL Database error 42830: there is no unique constraint matching given keys for referenced table "ball_by_ball"
+QUERY: ALTER TABLE batsman_scored ADD FOREIGN KEY(Over_Id) REFERENCES ball_by_ball(Innings_No) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-05T18:27:18.406621Z ERROR PostgreSQL Database error 42830: there is no unique constraint matching given keys for referenced table "ball_by_ball"
+QUERY: ALTER TABLE batsman_scored ADD FOREIGN KEY(Match_Id) REFERENCES ball_by_ball(Innings_No) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-05T18:27:18.439227Z ERROR PostgreSQL Database error 42830: there is no unique constraint matching given keys for referenced table "ball_by_ball"
+QUERY: ALTER TABLE batsman_scored ADD FOREIGN KEY(Innings_No) REFERENCES ball_by_ball(Ball_Id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-05T18:27:18.461791Z ERROR PostgreSQL Database error 42830: there is no unique constraint matching given keys for referenced table "ball_by_ball"
+QUERY: ALTER TABLE batsman_scored ADD FOREIGN KEY(Ball_Id) REFERENCES ball_by_ball(Ball_Id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-05T18:27:18.483334Z ERROR PostgreSQL Database error 42830: there is no unique constraint matching given keys for referenced table "ball_by_ball"
+QUERY: ALTER TABLE batsman_scored ADD FOREIGN KEY(Over_Id) REFERENCES ball_by_ball(Ball_Id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-05T18:27:18.500081Z ERROR PostgreSQL Database error 42830: there is no unique constraint matching given keys for referenced table "ball_by_ball"
+QUERY: ALTER TABLE batsman_scored ADD FOREIGN KEY(Match_Id) REFERENCES ball_by_ball(Ball_Id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-05T18:27:18.778676Z ERROR PostgreSQL Database error 42830: there is no unique constraint matching given keys for referenced table "ball_by_ball"
+QUERY: ALTER TABLE wicket_taken ADD FOREIGN KEY(Innings_No) REFERENCES ball_by_ball(Over_Id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-05T18:27:18.798800Z ERROR PostgreSQL Database error 42830: there is no unique constraint matching given keys for referenced table "ball_by_ball"
+QUERY: ALTER TABLE wicket_taken ADD FOREIGN KEY(Ball_Id) REFERENCES ball_by_ball(Over_Id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-05T18:27:18.814558Z ERROR PostgreSQL Database error 42830: there is no unique constraint matching given keys for referenced table "ball_by_ball"
+QUERY: ALTER TABLE wicket_taken ADD FOREIGN KEY(Over_Id) REFERENCES ball_by_ball(Over_Id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-05T18:27:18.838825Z ERROR PostgreSQL Database error 42830: there is no unique constraint matching given keys for referenced table "ball_by_ball"
+QUERY: ALTER TABLE wicket_taken ADD FOREIGN KEY(Match_Id) REFERENCES ball_by_ball(Over_Id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-05T18:27:18.863377Z ERROR PostgreSQL Database error 42830: there is no unique constraint matching given keys for referenced table "ball_by_ball"
+QUERY: ALTER TABLE wicket_taken ADD FOREIGN KEY(Innings_No) REFERENCES ball_by_ball(Match_Id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-05T18:27:18.877730Z ERROR PostgreSQL Database error 42830: there is no unique constraint matching given keys for referenced table "ball_by_ball"
+QUERY: ALTER TABLE wicket_taken ADD FOREIGN KEY(Ball_Id) REFERENCES ball_by_ball(Match_Id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-05T18:27:18.897604Z ERROR PostgreSQL Database error 42830: there is no unique constraint matching given keys for referenced table "ball_by_ball"
+QUERY: ALTER TABLE wicket_taken ADD FOREIGN KEY(Over_Id) REFERENCES ball_by_ball(Match_Id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-05T18:27:18.915069Z ERROR PostgreSQL Database error 42830: there is no unique constraint matching given keys for referenced table "ball_by_ball"
+QUERY: ALTER TABLE wicket_taken ADD FOREIGN KEY(Match_Id) REFERENCES ball_by_ball(Match_Id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-05T18:27:18.931951Z ERROR PostgreSQL Database error 42830: there is no unique constraint matching given keys for referenced table "ball_by_ball"
+QUERY: ALTER TABLE wicket_taken ADD FOREIGN KEY(Innings_No) REFERENCES ball_by_ball(Innings_No) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-05T18:27:18.965228Z ERROR PostgreSQL Database error 42830: there is no unique constraint matching given keys for referenced table "ball_by_ball"
+QUERY: ALTER TABLE wicket_taken ADD FOREIGN KEY(Ball_Id) REFERENCES ball_by_ball(Innings_No) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-05T18:27:18.990120Z ERROR PostgreSQL Database error 42830: there is no unique constraint matching given keys for referenced table "ball_by_ball"
+QUERY: ALTER TABLE wicket_taken ADD FOREIGN KEY(Over_Id) REFERENCES ball_by_ball(Innings_No) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-05T18:27:19.042056Z ERROR PostgreSQL Database error 42830: there is no unique constraint matching given keys for referenced table "ball_by_ball"
+QUERY: ALTER TABLE wicket_taken ADD FOREIGN KEY(Match_Id) REFERENCES ball_by_ball(Innings_No) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-05T18:27:19.071152Z ERROR PostgreSQL Database error 42830: there is no unique constraint matching given keys for referenced table "ball_by_ball"
+QUERY: ALTER TABLE wicket_taken ADD FOREIGN KEY(Innings_No) REFERENCES ball_by_ball(Ball_Id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-05T18:27:19.090040Z ERROR PostgreSQL Database error 42830: there is no unique constraint matching given keys for referenced table "ball_by_ball"
+QUERY: ALTER TABLE wicket_taken ADD FOREIGN KEY(Ball_Id) REFERENCES ball_by_ball(Ball_Id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-05T18:27:19.122987Z ERROR PostgreSQL Database error 42830: there is no unique constraint matching given keys for referenced table "ball_by_ball"
+QUERY: ALTER TABLE wicket_taken ADD FOREIGN KEY(Over_Id) REFERENCES ball_by_ball(Ball_Id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-05T18:27:19.157384Z ERROR PostgreSQL Database error 42830: there is no unique constraint matching given keys for referenced table "ball_by_ball"
+QUERY: ALTER TABLE wicket_taken ADD FOREIGN KEY(Match_Id) REFERENCES ball_by_ball(Ball_Id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-05T18:27:21.776530Z LOG report summary reset
+             table name     errors       rows      bytes      total time
+-----------------------  ---------  ---------  ---------  --------------
+                  fetch          0          0                     0.000s
+            before load          0          2                     0.655s
+        fetch meta data          0        131                     0.052s
+         Create Schemas          0          0                     0.001s
+       Create SQL Types          0          0                     0.003s
+          Create tables          0         44                     0.149s
+         Set Table OIDs          0         22                     0.002s
+-----------------------  ---------  ---------  ---------  --------------
+                 player          0        469    18.6 kB          2.502s
+             extra_runs          0       7469   127.7 kB          3.432s
+         batsman_scored          0     133097     2.0 MB         54.959s
+          batting_style          0          2     0.0 kB          4.132s
+          bowling_style          0         14     0.3 kB          4.933s
+                country          0         12     0.1 kB          5.460s
+                 season          0          9     0.2 kB          5.521s
+                   city          0         29     0.4 kB          5.800s
+                outcome          0          3     0.0 kB          5.512s
+                 win_by          0          4     0.0 kB          5.156s
+           wicket_taken          0       6727   147.2 kB          6.898s
+                  venue          0         35     1.1 kB          5.189s
+             extra_type          0          5     0.0 kB          5.762s
+               out_type          0          9     0.1 kB         12.090s
+          toss_decision          0          2     0.0 kB         12.815s
+                 umpire          0         52     0.8 kB         16.383s
+                   team          0         13     0.3 kB         18.484s
+           ball_by_ball          0     136590     3.9 MB       1m49.068s
+            sysdiagrams          0          1    95.0 kB         17.877s
+                  match          0        577    29.1 kB         17.659s
+                  rolee          0          4     0.0 kB         14.329s
+           player_match          0      12694   181.5 kB         23.297s
+-----------------------  ---------  ---------  ---------  --------------
+COPY Threads Completion          0          4                  2m24.606s
+         Create Indexes          0         28                     4.857s
+ Index Build Completion          0         28                     7.103s
+        Reset Sequences          0          1                     2.866s
+           Primary Keys          0         22                     0.495s
+    Create Foreign Keys         48         33                     4.196s
+        Create Triggers          0          0                     0.006s
+       Install Comments          0          0                     0.000s
+-----------------------  ---------  ---------  ---------  --------------
+      Total import time          ✓     297817     6.5 MB       2m44.129s
+pgloader
+Total reclaimed space: 0B

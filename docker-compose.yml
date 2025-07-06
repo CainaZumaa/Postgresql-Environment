@@ -9,13 +9,52 @@ x-common-settings: &common-settings
       max-size: "10m"
       max-file: "1"
 
+x-airflow-common:
+  &airflow-common
+  image: apache/airflow:3.0.2
+  environment:
+    &airflow-common-env
+    AIRFLOW__CORE__EXECUTOR: CeleryExecutor
+    AIRFLOW__CORE__AUTH_MANAGER: airflow.providers.fab.auth_manager.fab_auth_manager.FabAuthManager
+    AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
+    AIRFLOW__CELERY__RESULT_BACKEND: db+postgresql://airflow:airflow@postgres/airflow
+    AIRFLOW__CELERY__BROKER_URL: redis://:@redis:6379/0
+    AIRFLOW__CORE__FERNET_KEY: ''
+    AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'true'
+    AIRFLOW__CORE__LOAD_EXAMPLES: 'true'
+    AIRFLOW__CORE__EXECUTION_API_SERVER_URL: 'http://airflow-apiserver:8080/execution/'
+    AIRFLOW__SCHEDULER__ENABLE_HEALTH_CHECK: 'true'
+    _PIP_ADDITIONAL_REQUIREMENTS: ${_PIP_ADDITIONAL_REQUIREMENTS:-}
+    AIRFLOW_CONFIG: '/opt/airflow/config/airflow.cfg'
+  volumes:
+    - ./airflow/dags:/opt/airflow/dags
+    - ./airflow/logs:/opt/airflow/logs
+    - ./airflow/config:/opt/airflow/config
+    - ./airflow/plugins:/opt/airflow/plugins
+  user: "${AIRFLOW_UID:-50000}:0"
+  depends_on:
+    &airflow-common-depends-on
+    redis:
+      condition: service_healthy
+    postgres:
+      condition: service_healthy
+  cpus: 1
+  mem_limit: 1g
+  memswap_limit: 1g
+  logging:
+    driver: "json-file"
+    options:
+      max-size: "10m"
+      max-file: "1"
+
+
 services:
   # Postgresql
   maquina1:
     <<: *common-settings
     depends_on:
       maquina2:
-        condition: service_started
+        condition: service_healthy
     build:
       context: ./maquina1
     container_name: maquina1
@@ -27,6 +66,8 @@ services:
       - ./maquina1/data:/var/lib/postgresql/data:rw
       - ./maquina1/log:/var/lib/postgresql/log:rw
       - maquina1-ssh:/var/lib/postgresql/.ssh:rw
+      - ./maquina1/postgresql.conf:/var/lib/postgresql/data/postgresql.conf:rw
+      - ./maquina1/pg_hba.conf:/var/lib/postgresql/data/pg_hba.conf:rw
     networks:
       rede:
         ipv4_address: 110.0.0.111
@@ -37,12 +78,6 @@ services:
       interval: 5s
       timeout: 5s
       retries: 10
-    command: |
-      -c "archive_mode=on"
-      -c archive_command='pgbackrest --stanza=maquina1 archive-push "%p"'
-      -c "max_wal_senders=3"
-      -c "wal_level=replica"
-      -c "wal_keep_size=64MB"
 
   # Backup Server
   maquina2:
@@ -53,6 +88,11 @@ services:
     hostname: maquina2
     ports:
       - "2222:22"
+    healthcheck:
+      test: ["CMD-SHELL", "pgbackrest help > /dev/null || exit 1"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
     volumes:
       - ./maquina2/data:/var/lib/pgbackrest:rw
       - ./maquina2/log:/var/log/pgbackrest:rw
@@ -72,13 +112,15 @@ services:
     container_name: prometheus
     hostname: prometheus
     volumes:
-        - ./maquina3/prometheus.yml:/etc/prometheus/prometheus.yml"
+        - ./maquina3/prometheus.yml:/etc/prometheus/prometheus.yml
         - prometheus-data:/prometheus
     command:
         - '--config.file=/etc/prometheus/prometheus.yml'
-        - '--storage.tsdb.path=/prometheus'
-        - '--web.console.libraries=/usr/share/prometheus/console_libraries'
-        - '--web.console.templates=/usr/share/prometheus/consoles'
+        - '--storage.tsdb.wal-compression'
+        - '--storage.tsdb.retention.time=30d'
+        # - '--storage.tsdb.path=/prometheus'
+        # - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+        # - '--web.console.templates=/usr/share/prometheus/consoles'
     ports:
         - "9090:9090"
     networks:
@@ -96,7 +138,7 @@ services:
     ports:
         - "9187:9187"
     environment:
-        DATA_SOURCE_NAME: "postgres:postgres:postgres@maquina1/postgres?sslmode=disable"
+        DATA_SOURCE_NAME: "postgresql://postgres:postgres@maquina1:5432/maquina1?sslmode=disable"
     networks:
       rede:
         ipv4_address: 110.0.0.114
@@ -109,14 +151,327 @@ services:
     image: grafana/grafana
     container_name: grafana
     hostname: grafana
+    volumes:
+      - grafana-data:/var/lib/grafana
     environment:
         GF_SECURITY_ADMIN_PASSWORD: senha
         GF_USERS_ALLOW_SIGN_UP: false
     ports:
-        - "3000:3000"
+        - "4000:3000"
     networks:
       rede:
         ipv4_address: 110.0.0.115
+
+  dw:
+    <<: *common-settings
+    build:
+      context: ./dw
+      dockerfile: dockerfile
+    container_name: dw
+    hostname: dw
+    ports:
+      - "15433:5432"
+    volumes:
+      - ./dw/data:/var/lib/postgresql/data:rw
+      - ./dw/log:/var/lib/postgresql/log:rw
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks:
+      rede:
+        ipv4_address: 110.0.0.116
+    command: |
+      -c "wal_keep_size=64MB"
+
+
+  postgres:
+    container_name: airflow-db
+    hostname: airflow-db
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: airflow
+      POSTGRES_PASSWORD: airflow
+      POSTGRES_DB: airflow
+    volumes:
+      - postgres-db-volume:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "airflow"]
+      interval: 10s
+      retries: 5
+      start_period: 5s
+    restart: always
+    networks:
+      rede:
+        ipv4_address: 110.0.0.117
+
+  redis:
+    image: redis:7.2-bookworm
+    container_name: airflow-redis
+    hostname: airflow-redis
+    expose:
+      - 6379
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 30s
+      retries: 50
+      start_period: 30s
+    restart: always
+    networks:
+      rede:
+        ipv4_address: 110.0.0.118
+
+  airflow-apiserver:
+    <<: *airflow-common
+    container_name: airflow-apiserver
+    hostname: airflow-apiserver
+    build:
+      dockerfile: ./airflow/dockerfile
+    command: api-server
+    ports:
+      - "8080:8080"
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:8080/api/v2/version"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    restart: always
+    depends_on:
+      <<: *airflow-common-depends-on
+      airflow-init:
+        condition: service_completed_successfully
+    networks:
+      rede:
+        ipv4_address: 110.0.0.119
+
+  airflow-scheduler:
+    <<: *airflow-common
+    container_name: airflow-scheduler
+    hostname: airflow-scheduler
+    command: scheduler
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:8974/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    restart: always
+    depends_on:
+      <<: *airflow-common-depends-on
+      airflow-init:
+        condition: service_completed_successfully
+    networks:
+      rede:
+        ipv4_address: 110.0.0.120
+
+  airflow-dag-processor:
+    <<: *airflow-common
+    container_name: airflow-dag-processor
+    hostname: airflow-dag-processor
+    command: dag-processor
+    healthcheck:
+      test: ["CMD-SHELL", 'airflow jobs check --job-type DagProcessorJob --hostname "$${HOSTNAME}"']
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    restart: always
+    depends_on:
+      <<: *airflow-common-depends-on
+      airflow-init:
+        condition: service_completed_successfully
+    networks:
+      rede:
+        ipv4_address: 110.0.0.121
+
+  airflow-worker:
+    <<: *airflow-common
+    container_name: airflow-worker
+    hostname: airflow-worker
+    command: celery worker
+    healthcheck:
+      test:
+        - "CMD-SHELL"
+        - 'celery --app airflow.providers.celery.executors.celery_executor.app inspect ping -d "celery@$${HOSTNAME}" || celery --app airflow.executors.celery_executor.app inspect ping -d "celery@$${HOSTNAME}"'
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    environment:
+      <<: *airflow-common-env
+      DUMB_INIT_SETSID: "0"
+    restart: always
+    depends_on:
+      <<: *airflow-common-depends-on
+      airflow-apiserver:
+        condition: service_healthy
+      airflow-init:
+        condition: service_completed_successfully
+    networks:
+      rede:
+        ipv4_address: 110.0.0.122
+
+  airflow-triggerer:
+    <<: *airflow-common
+    container_name: airflow-triggerer
+    hostname: airflow-triggerer
+    command: triggerer
+    healthcheck:
+      test: ["CMD-SHELL", 'airflow jobs check --job-type TriggererJob --hostname "$${HOSTNAME}"']
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    restart: always
+    depends_on:
+      <<: *airflow-common-depends-on
+      airflow-init:
+        condition: service_completed_successfully
+    networks:
+      rede:
+        ipv4_address: 110.0.0.123
+
+  airflow-init:
+    <<: *airflow-common
+    container_name: airflow-init
+    hostname: airflow-init
+    entrypoint: /bin/bash
+    command:
+      - -c
+      - |
+        if [[ -z "${AIRFLOW_UID}" ]]; then
+          echo
+          echo -e "\033[1;33mWARNING!!!: AIRFLOW_UID not set!\e[0m"
+          echo "If you are on Linux, you SHOULD follow the instructions below to set "
+          echo "AIRFLOW_UID environment variable, otherwise files will be owned by root."
+          echo "For other operating systems you can get rid of the warning with manually created .env file:"
+          echo "    See: https://airflow.apache.org/docs/apache-airflow/stable/howto/docker-compose/index.html#setting-the-right-airflow-user"
+          echo
+          export AIRFLOW_UID=$(id -u)
+        fi
+        one_meg=1048576
+        mem_available=$$(($$(getconf _PHYS_PAGES) * $$(getconf PAGE_SIZE) / one_meg))
+        cpus_available=$$(grep -cE 'cpu[0-9]+' /proc/stat)
+        disk_available=$$(df / | tail -1 | awk '{print $$4}')
+        warning_resources="false"
+        if (( mem_available < 4000 )) ; then
+          echo
+          echo -e "\033[1;33mWARNING!!!: Not enough memory available for Docker.\e[0m"
+          echo "At least 4GB of memory required. You have $$(numfmt --to iec $$((mem_available * one_meg)))"
+          echo
+          warning_resources="true"
+        fi
+        if (( cpus_available < 2 )); then
+          echo
+          echo -e "\033[1;33mWARNING!!!: Not enough CPUS available for Docker.\e[0m"
+          echo "At least 2 CPUs recommended. You have $${cpus_available}"
+          echo
+          warning_resources="true"
+        fi
+        if (( disk_available < one_meg * 10 )); then
+          echo
+          echo -e "\033[1;33mWARNING!!!: Not enough Disk space available for Docker.\e[0m"
+          echo "At least 10 GBs recommended. You have $$(numfmt --to iec $$((disk_available * 1024 )))"
+          echo
+          warning_resources="true"
+        fi
+        if [[ $${warning_resources} == "true" ]]; then
+          echo
+          echo -e "\033[1;33mWARNING!!!: You have not enough resources to run Airflow (see above)!\e[0m"
+          echo "Please follow the instructions to increase amount of resources available:"
+          echo "   https://airflow.apache.org/docs/apache-airflow/stable/howto/docker-compose/index.html#before-you-begin"
+          echo
+        fi
+        echo
+        echo "Creating missing opt dirs if missing:"
+        echo
+        mkdir -v -p /opt/airflow/{logs,dags,plugins,config}
+        echo
+        echo "Airflow version:"
+        /entrypoint airflow version
+        echo
+        echo "Files in shared volumes:"
+        echo
+        ls -la /opt/airflow/{logs,dags,plugins,config}
+        echo
+        echo "Running airflow config list to create default config file if missing."
+        echo
+        /entrypoint airflow config list >/dev/null
+        echo
+        echo "Files in shared volumes:"
+        echo
+        ls -la /opt/airflow/{logs,dags,plugins,config}
+        echo
+        echo "Change ownership of files in /opt/airflow to ${AIRFLOW_UID}:0"
+        echo
+        chown -R "${AIRFLOW_UID}:0" /opt/airflow/
+        echo
+        echo "Change ownership of files in shared volumes to ${AIRFLOW_UID}:0"
+        echo
+        chown -v -R "${AIRFLOW_UID}:0" /opt/airflow/{logs,dags,plugins,config}
+        echo
+        echo "Files in shared volumes:"
+        echo
+        ls -la /opt/airflow/{logs,dags,plugins,config}
+
+    environment:
+      <<: *airflow-common-env
+      _AIRFLOW_DB_MIGRATE: 'true'
+      _AIRFLOW_WWW_USER_CREATE: 'true'
+      _AIRFLOW_WWW_USER_USERNAME: airflow
+      _AIRFLOW_WWW_USER_PASSWORD: airflow
+      _PIP_ADDITIONAL_REQUIREMENTS: ''
+    user: "0:0"
+    networks:
+      rede:
+        ipv4_address: 110.0.0.124
+
+  airflow-cli:
+    <<: *airflow-common
+    hostname: airflow-cli
+    container_name: airflow-cli
+    profiles:
+      - debug
+    environment:
+      <<: *airflow-common-env
+      CONNECTION_CHECK_MAX_COUNT: "0"
+    command:
+      - bash
+      - -c
+      - airflow
+    depends_on:
+      <<: *airflow-common-depends-on
+    networks:
+      rede:
+        ipv4_address: 110.0.0.125
+
+  flower:
+    <<: *airflow-common
+    container_name: airflow-flower
+    hostname: airflow-flower
+    command: celery flower
+    profiles:
+      - flower
+    ports:
+      - "5555:5555"
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:5555/"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    restart: always
+    depends_on:
+      <<: *airflow-common-depends-on
+      airflow-init:
+        condition: service_completed_successfully
+    networks:
+      rede:
+        ipv4_address: 110.0.0.126
+
 
 networks:
   rede:
@@ -136,4 +491,10 @@ volumes:
     driver: local
   prometheus-data:
     name: prometheus-data
+    driver: local
+  postgres-db-volume:
+    name: airflow-postgres-pgdata
+    driver: local
+  grafana-data:
+    name: grafana-data
     driver: local
