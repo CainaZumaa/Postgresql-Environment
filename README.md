@@ -173,7 +173,7 @@ Abre um shell interativo no container `maquina2` como usuário `postgres`.
    docker exec -u postgres maquina1 pg_ctl stop -D /var/lib/postgresql/data/pgdata
    docker exec -u root maquina1 rm -rf /var/lib/postgresql/data/pgdata
    docker exec -u root maquina1 ls /var/lib/postgresql/data/pgdata   --> o caminho não pode existir, deletamos todos o banco
-   docker exec -u postgres maquina1 pgbackrest --stanza=maquina1 --type=time --target="2025-07-06 11:17:09-04" --delta restore
+   docker exec -u postgres maquina1 pgbackrest --stanza=maquina1 --type=time --target="2025-07-07 18:50:47-03" restore
    docker exec -u root maquina1 chown -R postgres:postgres /var/lib/postgresql/data/pgdata
    docker exec -u root maquina1 chmod 750 /var/lib/postgresql/data/pgdata
    bash run.sh restart
@@ -211,3 +211,21 @@ Abre um shell interativo no container `maquina2` como usuário `postgres`.
    ```
 
 ## 📥 ➡️ 🔄 ➡️ 📤 Processo de ETL com Airflow + dbt
+
+O Airflow já está configurado e os volumes dentro dele e do dbt já foram criados, portanto, não precisa reiniciar o container para modificar arquivos de DAGs e model do DBT.
+
+1. Suas DAGs são o processos do Airflow que irão executar seu ETL.
+
+2. Os diretórios das DAGs já foram configurados e a interface do Airflow pode ser acessada em http://localhost:8080/ utilizar a senha "airflow" e usuário "airflow". Uma DAG que roda o batch do dbt já irá estar disponível. Utilizem a interface para rodar seus DAGs.
+
+3. O DBT irá executar os arquivos de SQL que estiverem dentro da pasta models. Criei 2 schemas iniciais: staging, intermediate e mart. Usem eles para executarem diferentes transformações com o dbt para tranformar as tabelas até chegar a formação do dw.
+
+4. Uma model de exemplo já foi criada e já está levando as informações do container da maquina1 para o dw.
+
+5. Criem os arquivo de sql necessários para execução de processo de etl.
+
+6. Comando para rodar o dbt manualmente. Este já está dentro da dag do airflow:
+
+   ```bash
+   cd /opt/airflow/dbt && dbt run --target destination --profiles-dir /opt/airflow/dbt
+   ```

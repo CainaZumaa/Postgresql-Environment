@@ -15,14 +15,18 @@ dw/*
 !dw/dockerfile
 !dw/relacional.sql
 
-dbt/*
-!dbt/
-!dbt/dockerfile
-!dbt/requirements.txt
-!dbt/dbt_project.yml
+
 
 airflow/*
 !airflow/
+!airflow/dbt/
+airflow/dbt/target/*
+airflow/dbt/logs/*
+!airflow/dbt/*
+airflow/dbt/.user.yml
+airflow/dags/*
+!airflow/dags/
+!airflow/dags/etl_dbt_pipeline.py
 !airflow/dockerfile
 !airflow/requirements.txt
-
+airflow/dbt/dbt_internal_packages/*

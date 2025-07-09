@@ -11,7 +11,8 @@ x-common-settings: &common-settings
 
 x-airflow-common:
   &airflow-common
-  image: apache/airflow:3.0.2
+  build:
+    dockerfile: ./airflow/dockerfile
   environment:
     &airflow-common-env
     AIRFLOW__CORE__EXECUTOR: CeleryExecutor
@@ -21,16 +22,20 @@ x-airflow-common:
     AIRFLOW__CELERY__BROKER_URL: redis://:@redis:6379/0
     AIRFLOW__CORE__FERNET_KEY: ''
     AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'true'
-    AIRFLOW__CORE__LOAD_EXAMPLES: 'true'
+    AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
     AIRFLOW__CORE__EXECUTION_API_SERVER_URL: 'http://airflow-apiserver:8080/execution/'
     AIRFLOW__SCHEDULER__ENABLE_HEALTH_CHECK: 'true'
     _PIP_ADDITIONAL_REQUIREMENTS: ${_PIP_ADDITIONAL_REQUIREMENTS:-}
     AIRFLOW_CONFIG: '/opt/airflow/config/airflow.cfg'
+    AIRFLOW__API__AUTH_BACKEND: airflow.api.auth.backend.default
+    AIRFLOW__API__SECRET_KEY: airflow.api.auth.backend.default
   volumes:
     - ./airflow/dags:/opt/airflow/dags
+    - ./airflow/dbt:/opt/dbt
     - ./airflow/logs:/opt/airflow/logs
     - ./airflow/config:/opt/airflow/config
     - ./airflow/plugins:/opt/airflow/plugins
+    - /var/run/docker.sock:/var/run/docker.sock
   user: "${AIRFLOW_UID:-50000}:0"
   depends_on:
     &airflow-common-depends-on
@@ -153,9 +158,13 @@ services:
     hostname: grafana
     volumes:
       - grafana-data:/var/lib/grafana
+      - ./grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards:rw
+      - ./grafana/provisioning/datasources:/etc/grafana/provisioning/datasources:rw
+      - ./grafana/dashboards:/var/lib/grafana/dashboards:rw
     environment:
-        GF_SECURITY_ADMIN_PASSWORD: senha
-        GF_USERS_ALLOW_SIGN_UP: false
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: senha
+      GF_USERS_ALLOW_SIGN_UP: false
     ports:
         - "4000:3000"
     networks:
@@ -179,6 +188,9 @@ services:
       interval: 5s
       timeout: 5s
       retries: 10
+    depends_on:
+      maquina1:
+        condition: service_healthy
     networks:
       rede:
         ipv4_address: 110.0.0.116
@@ -227,8 +239,6 @@ services:
     <<: *airflow-common
     container_name: airflow-apiserver
     hostname: airflow-apiserver
-    build:
-      dockerfile: ./airflow/dockerfile
     command: api-server
     ports:
       - "8080:8080"
@@ -246,6 +256,9 @@ services:
     networks:
       rede:
         ipv4_address: 110.0.0.119
+    cpus: 2
+    mem_limit: 2g
+    memswap_limit: 2g
 
   airflow-scheduler:
     <<: *airflow-common
@@ -283,6 +296,9 @@ services:
       <<: *airflow-common-depends-on
       airflow-init:
         condition: service_completed_successfully
+    cpus: 2
+    mem_limit: 2g
+    memswap_limit: 2g
     networks:
       rede:
         ipv4_address: 110.0.0.121
@@ -310,6 +326,12 @@ services:
         condition: service_healthy
       airflow-init:
         condition: service_completed_successfully
+    volumes:
+      - ./airflow/dbt:/opt/airflow/dbt
+      - ./airflow/dags:/opt/airflow/dags
+    cpus: 3
+    mem_limit: 4g
+    memswap_limit: 4g
     networks:
       rede:
         ipv4_address: 110.0.0.122
@@ -330,6 +352,9 @@ services:
       <<: *airflow-common-depends-on
       airflow-init:
         condition: service_completed_successfully
+    cpus: 2
+    mem_limit: 2g
+    memswap_limit: 2g
     networks:
       rede:
         ipv4_address: 110.0.0.123
@@ -471,7 +496,6 @@ services:
     networks:
       rede:
         ipv4_address: 110.0.0.126
-
 
 networks:
   rede:

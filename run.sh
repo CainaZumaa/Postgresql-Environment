@@ -30,7 +30,7 @@ drop_hard(){
     docker rm $(docker ps -aq);
     docker rmi -f $(docker images -aq);
     docker volume rm $(docker volume ls -q);
-    sudo rm -rf ./maquina2/data ./maquina2/log ./dw/data ./dw/log ./dbt/data ./dbt/.dbt ./airflow/dags ./airflow/logs ./airflow/config ./airflow/plugins;
+    sudo rm -rf ./maquina2/data ./maquina2/log ./dw/data ./dw/log ./dbt/data ./dbt/dbt_internal_packages ./dbt/.dbt ./airflow/logs ./airflow/config ./airflow/plugins;
     docker network rm $(docker network ls -q | grep -vE '^(bridge|host|none)$');
 }
 

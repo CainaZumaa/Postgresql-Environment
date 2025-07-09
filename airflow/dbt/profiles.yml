@@ -1,0 +1,26 @@
+default:
+  target: destination
+
+  outputs:
+    source:
+      type: postgres
+      host: maquina1
+      user: postgres
+      password: postgres
+      port: 5432
+      dbname: maquina1
+      schema: public
+      quoting:
+        database: false
+        schema: true
+        identifier: true
+
+
+    destination:
+      type: postgres
+      host: dw
+      user: postgres
+      password: postgres
+      port: 5432
+      dbname: dw
+      schema: public
