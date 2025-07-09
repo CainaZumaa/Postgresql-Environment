@@ -1,5 +1,5 @@
+# Ambiente PostgreSQL automatizado
 
-# PostgreSQL 17 + Backup com pgBackRest + Monitoramento (Prometheus + Grafana)
 
 Este projeto levanta um ambiente completo com:
 
@@ -8,6 +8,9 @@ Este projeto levanta um ambiente completo com:
 - Exportador de métricas **postgres_exporter**
 - Monitoramento via **Prometheus**
 - Dashboard com **Grafana**
+- ETL com **Airflow + dbt**
+- EL com **PGLoader**
+- PostgreSQL 17 servindo como DW
 
 > O projeto utiliza **Docker Compose** para facilitar o provisionamento e gerenciamento dos serviços.
 
