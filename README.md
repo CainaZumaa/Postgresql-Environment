@@ -1,213 +1,265 @@
+# 🏈 European Soccer Database - Ambiente PostgreSQL Completo
 
-# PostgreSQL 17 + Backup com pgBackRest + Monitoramento (Prometheus + Grafana)
+Este projeto implementa um ambiente completo para análise de dados de futebol europeu, baseado no dataset do Kaggle: [European Soccer Database](https://www.kaggle.com/datasets/hugomathien/soccer).
 
-Este projeto levanta um ambiente completo com:
+## 🚀 Serviços Incluídos
 
-- PostgreSQL 17 com suporte a SSH
-- Servidor de backup em Ubuntu com **pgBackRest**
-- Exportador de métricas **postgres_exporter**
-- Monitoramento via **Prometheus**
-- Dashboard com **Grafana**
+| Serviço               | Descrição                                | Porta |
+| --------------------- | ---------------------------------------- | ----- |
+| `maquina1`            | PostgreSQL 17 com dados de futebol       | 15432 |
+| `maquina2`            | Servidor de backup Ubuntu com pgBackRest | 2222  |
+| `pgadmin`             | Interface web para gerenciar PostgreSQL  | 5050  |
+| `pgloader`            | Ferramenta para importação de dados CSV  | -     |
+| `postgresql-exporter` | Exportador de métricas para Prometheus   | 9187  |
+| `prometheus`          | Coletor e armazenamento de métricas      | 9090  |
+| `grafana`             | Dashboard para visualização de dados     | 3000  |
 
-> O projeto utiliza **Docker Compose** para facilitar o provisionamento e gerenciamento dos serviços.
+## 📊 Dataset de Futebol
 
----
+O projeto utiliza o **European Soccer Database** que contém:
 
-## 🚀 Serviços incluídos
+- **25,000+ partidas** de 11 países europeus
+- **10,000+ jogadores** com atributos detalhados
+- **8 temporadas** (2008-2016)
+- **Dados de apostas** e estatísticas de jogo
+- **Informações de times** e ligas
 
-| Serviço              | Descrição                                                    |
-|----------------------|--------------------------------------------------------------|
-| `maquina1`           | PostgreSQL 17 com SSH habilitado                             |
-| `maquina2`           | Ubuntu com pgBackRest configurado para backups remotos       |
-| `postgres_exporter`  | Exportador de métricas para o Prometheus                     |
-| `prometheus`         | Coletor de métricas                                          |
-| `grafana`            | Dashboard para visualização dos dados                        |
+### Estrutura do Banco de Dados
 
----
+```sql
+-- Tabelas principais
+countries          -- Países das ligas
+leagues            -- Ligas de futebol
+teams              -- Times participantes
+players            -- Jogadores
+player_attributes  -- Atributos dos jogadores (FIFA-style)
+seasons            -- Temporadas
+matches            -- Partidas com estatísticas completas
+```
 
-## 📜 Pré-requisitos
+## 🛠️ Pré-requisitos
 
 - [Docker](https://www.docker.com/)
 - [Docker Compose](https://docs.docker.com/compose/)
+- Dataset do Kaggle baixado e extraído na pasta `data/`
 
----
+## 📥 Preparação dos Dados
 
-## 🔧 Comandos disponíveis (`run.sh`)
+1. **Baixe o dataset do Kaggle:**
 
-### `./run.sh build`
+   ```
+   https://www.kaggle.com/datasets/hugomathien/soccer
+   ```
 
-O serviço deve ser buildado dessa forma, caso contrário o airflow, não irá funcionar. O bash exporta uma variável que é utilizada por ele.
-Faz o build das imagens com cache desabilitado e limite de memória:
+2. **Extraia os arquivos CSV na pasta `data/`:**
+   ```
+   Postgresql-Environment/data/
+   ├── Country.csv
+   ├── League.csv
+   ├── Team.csv
+   ├── Player.csv
+   ├── Player_Attributes.csv
+   ├── Season.csv
+   └── Match.csv
+   ```
 
-```bash
-docker-compose build --no-cache --memory 4g --progress=plain
-```
+## 🔧 Comandos Disponíveis (`run.sh`)
 
----
-
-### `./run.sh up`
-
-Sobe todos os containers em segundo plano (`-d`):
-
-```bash
-docker-compose up -d
-```
-
----
-
-### `./run.sh stop` ou `./run.sh drop`
-
-Derruba todos os containers:
+### Comandos Básicos
 
 ```bash
-docker-compose down
+./run.sh build      # Build das imagens Docker
+./run.sh up         # Subir todos os serviços
+./run.sh stop       # Parar todos os serviços
+./run.sh restart    # Reiniciar todos os serviços
+./run.sh drop_hard  # Remover tudo (cuidado!)
 ```
 
----
-
-### `./run.sh restart`
-
-Reinicia todos os serviços:
+### Comandos Específicos do Projeto
 
 ```bash
-docker-compose down && docker-compose up -d
+./run.sh importData    # Importar dados do dataset
+./run.sh setupBackup   # Configurar backup automático
+./run.sh cpKeys        # Configurar SSH entre servidores
+./run.sh showStatus    # Mostrar status e URLs
+./run.sh bashMaquina1  # Acessar shell do PostgreSQL
+./run.sh bashMaquina2  # Acessar shell do servidor de backup
 ```
 
----
+## 🚀 Início Rápido
 
-### `./run.sh drop_hard`
-
-Derruba os containers, remove imagens, volumes e dados persistidos localmente:
+### 1. Preparar os Dados
 
 ```bash
-docker-compose down --volumes --remove-orphans --rmi all
-docker builder prune --all --force
-sudo rm -rf ./maquina1/data ./maquina1/log
-sudo rm -rf ./maquina2/data ./maquina2/log
+# Baixe o dataset do Kaggle e extraia na pasta data/
+# Os arquivos CSV devem estar em: ./data/
 ```
 
-⚠️ **Atenção:** este comando apaga os dados da base e do backup.
+### 2. Subir o Ambiente
 
----
+```bash
+./run.sh build
+./run.sh up
+```
 
-### `./run.sh cpKeys`
+### 3. Configurar Backup
 
-Gera e configura chaves SSH entre `maquina1` e `maquina2` para permitir backups via `pgBackRest`.
+```bash
+./run.sh setupBackup
+```
 
----
+### 4. Importar Dados
 
-### `./run.sh bashMaquina1`
+```bash
+./run.sh importData
+```
 
-Abre um shell interativo no container `maquina1` como usuário `postgres`.
+### 5. Acessar as Ferramentas
 
----
-
-### `./run.sh bashMaquina2`
-
-Abre um shell interativo no container `maquina2` como usuário `postgres`.
-
----
+| Ferramenta     | URL                   | Credenciais                 |
+| -------------- | --------------------- | --------------------------- |
+| **pgAdmin**    | http://localhost:5050 | admin@soccer.com / admin123 |
+| **Grafana**    | http://localhost:3000 | admin / senha               |
+| **Prometheus** | http://localhost:9090 | -                           |
+| **PostgreSQL** | localhost:15432       | postgres / postgres         |
 
 ## 📈 Monitoramento
 
-* A exportação de métricas do PostgreSQL é feita via [`postgres_exporter`](https://github.com/prometheus-community/postgres_exporter).
-* O Prometheus coleta e armazena as métricas.
-* O Grafana exibe as métricas em dashboards interativos.
+### Grafana Dashboards
 
----
+- **Métricas do PostgreSQL**: Conexões, queries, performance
+- **Dados de Futebol**: Estatísticas de partidas, jogadores, times
+- **Sistema**: CPU, memória, disco
+
+### Prometheus
+
+- Coleta métricas a cada 15 segundos
+- Armazena dados por 30 dias
+- Exportador PostgreSQL configurado
 
 ## 💾 Backup com pgBackRest
 
-* O `pgBackRest` é instalado no container `maquina2` (Ubuntu).
-* A comunicação entre os servidores é feita via SSH.
-* O script `cpKeys` cuida da geração e troca de chaves públicas.
+- **Backup automático** configurado
+- **Compressão** para economizar espaço
+- **Retenção** de 5 backups completos
+- **Comunicação SSH** segura entre servidores
 
----
+### Comandos de Backup
 
-## 📂 Processo de backup
+```bash
+# Verificar status do backup
+docker exec -u postgres maquina1 pgbackrest --stanza=maquina1 info
 
-1. Execute:
+# Fazer backup manual
+docker exec -u postgres maquina1 pgbackrest --stanza=maquina1 --type=full backup
+
+# Restaurar backup
+docker exec -u postgres maquina1 pgbackrest --stanza=maquina1 --type=full restore
+```
+
+## 🔍 Exemplos de Consultas SQL
+
+### Top 10 Jogadores por Overall Rating
+
+```sql
+SELECT player_name, overall_rating, potential
+FROM players p
+JOIN player_attributes pa ON p.player_fifa_api_id = pa.player_fifa_api_id
+WHERE pa.overall_rating IS NOT NULL
+ORDER BY pa.overall_rating DESC
+LIMIT 10;
+```
+
+### Estatísticas por Liga
+
+```sql
+SELECT
+    l.name as league,
+    COUNT(m.id) as total_matches,
+    AVG(m.home_team_goal + m.away_team_goal) as avg_goals_per_match
+FROM matches m
+JOIN leagues l ON m.league_id = l.id
+GROUP BY l.id, l.name
+ORDER BY avg_goals_per_match DESC;
+```
+
+### Performance de Times em Casa
+
+```sql
+SELECT
+    t.team_long_name,
+    COUNT(m.id) as home_matches,
+    AVG(m.home_team_goal) as avg_goals_scored,
+    AVG(m.away_team_goal) as avg_goals_conceded
+FROM matches m
+JOIN teams t ON m.home_team_id = t.id
+GROUP BY t.id, t.team_long_name
+HAVING COUNT(m.id) > 10
+ORDER BY avg_goals_scored DESC;
+```
+
+## 🐛 Troubleshooting
+
+### Problemas Comuns
+
+1. **Erro de conexão SSH:**
 
    ```bash
    ./run.sh cpKeys
    ```
 
-   para configurar a comunicação SSH entre as máquinas.
-
-2. Execute:
+2. **Dados não importados:**
 
    ```bash
-   docker exec -u postgres maquina1 pgbackrest --stanza=maquina1 stanza-create
+   # Verificar se arquivos CSV estão na pasta data/
+   ls -la ./data/
+
+   # Reimportar dados
+   ./run.sh importData
    ```
 
-   para criar pasta dedicada para o backup no servidor de backup `maquina2`.
-
-
-3. Execute:
+3. **Container não inicia:**
 
    ```bash
-   docker exec -u postgres maquina1 pgbackrest --stanza=maquina1 check
+   # Ver logs
+   docker-compose logs maquina1
+
+   # Rebuild
+   ./run.sh drop_hard
+   ./run.sh build
+   ./run.sh up
    ```
 
-   para testar a comunicação SSH entre as máquinas.
+### Logs Importantes
 
-4. Execute:
+```bash
+# Logs do PostgreSQL
+docker exec maquina1 tail -f /var/lib/postgresql/log/postgresql-maquina1.log
 
-   ```bash
-   docker exec -u postgres maquina1 pgbackrest --stanza=maquina1 --type=full backup
-   ```
+# Logs do pgBackRest
+docker exec maquina2 tail -f /var/log/pgbackrest/pgbackrest.log
 
-   para realizar o primeiro backup completo.
+# Logs do pgloader
+docker logs pgloader
+```
 
-5. Execute:
+## 📚 Recursos Adicionais
 
-   ```bash
-   docker exec -u postgres maquina1 pgbackrest --stanza=maquina1 info
-   ```
+- **Documentação pgBackRest**: https://pgbackrest.org/
+- **Documentação pgloader**: https://pgloader.readthedocs.io/
+- **Dataset Original**: https://www.kaggle.com/datasets/hugomathien/soccer
+- **Documentação PostgreSQL**: https://www.postgresql.org/docs/
 
-   para verificar o status do backup.
+## 🤝 Contribuição
 
-6. Execute:
+Para contribuir com melhorias:
 
-   ```bash
-   docker exec -u postgres maquina1 pg_ctl stop -D /var/lib/postgresql/data/pgdata
-   docker exec -u root maquina1 rm -rf /var/lib/postgresql/data/pgdata
-   docker exec -u root maquina1 ls /var/lib/postgresql/data/pgdata   --> o caminho não pode existir, deletamos todos o banco
-   docker exec -u postgres maquina1 pgbackrest --stanza=maquina1 --type=time --target="2025-07-06 11:17:09-04" --delta restore
-   docker exec -u root maquina1 chown -R postgres:postgres /var/lib/postgresql/data/pgdata
-   docker exec -u root maquina1 chmod 750 /var/lib/postgresql/data/pgdata
-   bash run.sh restart
-   ```
+1. Fork o projeto
+2. Crie uma branch para sua feature
+3. Commit suas mudanças
+4. Push para a branch
+5. Abra um Pull Request
 
-   para realizar o restore do backup.
+## 📄 Licença
 
-   ⚠️ **Atenção:** Para ver os arquivos é necessários executar o comando para ter permissão. sudo chmod 777 ./ -R
-
-8. Verifique os logs do PostgreSQL se houver falhas no `pgBackRest`:
-
-   ```bash
-   docker exec maquina1 tail -f /var/lib/postgresql/log/postgresql.log
-   ```
-
-   ou acesse direto pelo na pasta `maquina1/log`
-
-## 🧑‍💻 Processo de monitoramento
-
-1. Acesse o Grafana em: [http://localhost:3000](http://localhost:4000)
-
-   * Usuário padrão: `admin`
-   * Senha padrão: `senha`
-
-   exemplo de dash: https://grafana.com/grafana/dashboards/9628-postgresql-database/
-
-
-## 📂➡️📤 Processo de carga de dados pelo pgloader
-
-1. Lembre-se de colocar o arquivo .sqlite que será importado dentro da pasta pgloader
-
-   ```bash
-   cd pglaoder
-   bash run.sh
-   ```
-
-## 📥 ➡️ 🔄 ➡️ 📤 Processo de ETL com Airflow + dbt
+Este projeto está sob a licença MIT. Veja o arquivo LICENSE para detalhes.

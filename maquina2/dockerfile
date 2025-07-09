@@ -39,8 +39,6 @@ RUN mkdir -p /var/lib/postgresql/.ssh \
     && chmod 700 /var/lib/postgresql/.ssh \
     && chmod 600 /var/lib/postgresql/.ssh/*
 
-    # && cat /var/lib/postgresql/.ssh/id_rsa.pub > /var/lib/postgresql/.ssh/authorized_keys \
-
 # Configura o SSH para aceitar conexões sem confirmação
 RUN passwd -d root && \
     echo "AuthorizedKeysFile .ssh/authorized_keys" >> /etc/ssh/sshd_config && \
@@ -71,37 +69,11 @@ start-fast=y
 pg1-host=maquina1
 pg1-port=5432
 pg1-user=postgres
-pg1-database=maquina1
+pg1-database=soccer_db
 pg1-path=/var/lib/postgresql/data/pgdata
 
 EOF
 RUN chmod 640 /var/lib/postgresql/pgbackrest.conf && chown postgres:postgres /var/lib/postgresql/pgbackrest.conf
-
-# Entrypoint Custom
-RUN cat > /var/lib/postgresql/entrypoint-custom.sh <<EOF
-#!/bin/bash
-set -e
-
-# Iniciar o Cron
-sudo service cron start
-
-# Iniciar o SSH
-sudo service ssh start
-
-# Garantir permissoes
-sudo chown -R postgres:postgres /var/lib/postgresql
-sudo chown -R postgres:postgres /var/lib/pgbackrest
-sudo chown -R postgres:postgres /tmp/pgbackrest
-
-# Manter o container rodando
-tail -f /dev/null
-
-#Configura o pgbackrest
-sudo -u postgres pgbackrest --stanza=maquina1 stanza-create
-sudo -u postgres pgbackrest --stanza=maquina1 check
-sudo -u postgres pgbackrest --stanza=maquina1 --type=full backup
-
-EOF
 
 # Cria diretório para chaves SSH
 RUN mkdir -p /var/lib/postgresql/.ssh && chmod 700 /var/lib/postgresql/.ssh
@@ -115,6 +87,50 @@ Host maquina1
 
 EOF
 RUN chmod 600 /var/lib/postgresql/.ssh/config && chown postgres:postgres /var/lib/postgresql/.ssh/config
+
+# Entrypoint Custom Corrigido
+RUN cat > /var/lib/postgresql/entrypoint-custom.sh <<EOF
+#!/bin/bash
+set -e
+
+# Função para shutdown graceful
+cleanup() {
+    echo "Recebido sinal de shutdown..."
+    exit 0
+}
+
+trap cleanup SIGTERM SIGINT
+
+# Iniciar o Cron
+sudo service cron start
+
+# Iniciar o SSH
+sudo service ssh start
+
+# Garantir permissoes
+sudo chown -R postgres:postgres /var/lib/postgresql
+sudo chown -R postgres:postgres /var/lib/pgbackrest
+sudo chown -R postgres:postgres /tmp/pgbackrest
+
+# Aguardar maquina1 estar disponível
+echo "Aguardando maquina1 estar disponível..."
+until pg_isready -h maquina1 -U postgres; do
+    echo "maquina1 não está pronta, aguardando..."
+    sleep 5
+done
+
+echo "maquina1 está pronta, configurando pgBackRest..."
+
+# Configurar pgBackRest
+sudo -u postgres pgbackrest --stanza=maquina1 stanza-create || echo "Stanza já existe"
+sudo -u postgres pgbackrest --stanza=maquina1 check
+
+echo "pgBackRest configurado com sucesso"
+
+# Manter container rodando
+tail -f /dev/null
+
+EOF
 
 RUN chmod +x /var/lib/postgresql/entrypoint-custom.sh
 

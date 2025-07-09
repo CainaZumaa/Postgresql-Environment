@@ -1,0 +1,14 @@
+-- Script de importação para o dataset de futebol (SQLite)
+-- Baseado no dataset: https://www.kaggle.com/datasets/hugomathien/soccer
+
+LOAD DATABASE
+    FROM sqlite:///data/database.sqlite
+    INTO postgresql://postgres:postgres@maquina1:5432/soccer_db
+
+WITH include drop, create tables, create indexes, reset sequences
+
+SET work_mem to '128 MB', maintenance_work_mem to '512 MB'
+
+BEFORE LOAD DO
+    $$ create schema if not exists soccer; $$,
+    $$ alter database soccer_db set search_path to soccer; $$; 
