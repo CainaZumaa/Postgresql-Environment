@@ -159,3 +159,1276 @@ COPY Threads Completion          0          4                  2m24.606s
       Total import time          ✓     297817     6.5 MB       2m44.129s
 pgloader
 Total reclaimed space: 0B
+ccl.latest: Pulling from dimitri/pgloader
+59ce1b6c0c82: Already exists
+69788ce58f29: Pulling fs layer
+097daea1c5b5: Pulling fs layer
+69788ce58f29: Verifying Checksum
+69788ce58f29: Download complete
+097daea1c5b5: Verifying Checksum
+097daea1c5b5: Download complete
+69788ce58f29: Pull complete
+097daea1c5b5: Pull complete
+Digest: sha256:f6ab423661145fe71be3edec2cec4341facc88c5ce52d755a2d6f3ae73614c0b
+Status: Downloaded newer image for dimitri/pgloader:ccl.latest
+docker.io/dimitri/pgloader:ccl.latest
+274916524ec229eb6f5f3eeb5931b5d27f013645db27910c396471e6c66fd15d
+2025-07-09T22:59:42.003008Z LOG pgloader version "3.6.7~devel"
+2025-07-09T22:59:42.598573Z LOG Migrating from #<SQLITE-CONNECTION sqlite:///data/base.sqlite #x30200209213D>
+2025-07-09T22:59:42.598940Z LOG Migrating into #<PGSQL-CONNECTION pgsql://postgres@localhost:15432/postgres #x302002091FED>
+2025-07-09T22:59:44.941997Z ERROR Database error 22P02: invalid input syntax for type bigint: "NIL"
+CONTEXT: COPY player, line 1, column height: "NIL"
+2025-07-09T23:00:17.285724Z ERROR PostgreSQL Database error 23503: insert or update on table "player_attributes" violates foreign key constraint "player_attributes_player_api_id_fkey"
+DETAIL: Key (player_api_id)=(505942) is not present in table "player".
+QUERY: ALTER TABLE player_attributes ADD FOREIGN KEY(player_api_id) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:00:17.287168Z ERROR PostgreSQL Database error 23503: insert or update on table "player_attributes" violates foreign key constraint "player_attributes_player_fifa_api_id_fkey"
+DETAIL: Key (player_fifa_api_id)=(218353) is not present in table "player".
+QUERY: ALTER TABLE player_attributes ADD FOREIGN KEY(player_fifa_api_id) REFERENCES player(player_fifa_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:00:17.288781Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_11_fkey"
+DETAIL: Key (away_player_11)=(31073) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_11) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:00:17.290500Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_10_fkey"
+DETAIL: Key (away_player_10)=(31953) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_10) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:00:17.291787Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_9_fkey"
+DETAIL: Key (away_player_9)=(24002) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_9) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:00:17.296443Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_8_fkey"
+DETAIL: Key (away_player_8)=(33049) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_8) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:00:17.298270Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_7_fkey"
+DETAIL: Key (away_player_7)=(24978) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_7) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:00:17.300149Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_6_fkey"
+DETAIL: Key (away_player_6)=(35443) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_6) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:00:17.301771Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_5_fkey"
+DETAIL: Key (away_player_5)=(23787) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_5) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:00:17.303529Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_4_fkey"
+DETAIL: Key (away_player_4)=(34193) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_4) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:00:17.304878Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_3_fkey"
+DETAIL: Key (away_player_3)=(23837) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_3) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:00:17.307202Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_2_fkey"
+DETAIL: Key (away_player_2)=(24226) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_2) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:00:17.310520Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_1_fkey"
+DETAIL: Key (away_player_1)=(31432) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_1) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:00:17.312891Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_11_fkey"
+DETAIL: Key (home_player_11)=(30953) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_11) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:00:17.316458Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_10_fkey"
+DETAIL: Key (home_player_10)=(71550) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_10) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:00:17.318210Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_9_fkey"
+DETAIL: Key (home_player_9)=(40015) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_9) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:00:17.319451Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_8_fkey"
+DETAIL: Key (home_player_8)=(25005) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_8) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:00:17.321206Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_7_fkey"
+DETAIL: Key (home_player_7)=(129817) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_7) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:00:17.322721Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_6_fkey"
+DETAIL: Key (home_player_6)=(29581) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_6) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:00:17.326135Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_5_fkey"
+DETAIL: Key (home_player_5)=(111865) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_5) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:00:17.329014Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_4_fkey"
+DETAIL: Key (home_player_4)=(24230) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_4) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:00:17.330667Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_3_fkey"
+DETAIL: Key (home_player_3)=(35472) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_3) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:00:17.332789Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_2_fkey"
+DETAIL: Key (home_player_2)=(34987) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_2) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:00:17.334237Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_1_fkey"
+DETAIL: Key (home_player_1)=(34421) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_1) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:00:17.374197Z ERROR PostgreSQL Database error 42830: there is no unique constraint matching given keys for referenced table "team"
+QUERY: ALTER TABLE team_attributes ADD FOREIGN KEY(team_fifa_api_id) REFERENCES team(team_fifa_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:00:17.378165Z LOG report summary reset
+             table name     errors       rows      bytes      total time
+-----------------------  ---------  ---------  ---------  --------------
+                  fetch          0          0                     0.000s
+            before load          0          2                     0.297s
+        fetch meta data          0         49                     0.018s
+         Create Schemas          0          0                     0.001s
+       Create SQL Types          0          0                     0.001s
+          Create tables          0         14                     0.025s
+         Set Table OIDs          0          7                     0.001s
+-----------------------  ---------  ---------  ---------  --------------
+                 player          1          0                     2.142s
+      player_attributes          0     183978    28.3 MB         32.223s
+                  match          0      25979   267.1 MB         33.141s
+                 league          0         11     0.3 kB          0.709s
+                country          0         11     0.1 kB          2.381s
+                   team          0        299     9.6 kB          2.490s
+        team_attributes          0       1458   211.4 kB          2.103s
+-----------------------  ---------  ---------  ---------  --------------
+COPY Threads Completion          0          4                    33.240s
+         Create Indexes          0         13                     0.420s
+ Index Build Completion          0         13                     0.589s
+        Reset Sequences          0          7                     0.273s
+           Primary Keys          0          7                     0.010s
+    Create Foreign Keys         25          4                     0.091s
+        Create Triggers          0          0                     0.000s
+       Install Comments          0          0                     0.000s
+-----------------------  ---------  ---------  ---------  --------------
+      Total import time          1     211736   295.5 MB         34.623s
+pgloader
+Total reclaimed space: 0B
+ccl.latest: Pulling from dimitri/pgloader
+Digest: sha256:f6ab423661145fe71be3edec2cec4341facc88c5ce52d755a2d6f3ae73614c0b
+Status: Image is up to date for dimitri/pgloader:ccl.latest
+docker.io/dimitri/pgloader:ccl.latest
+5c22f5833657b30555461f0e4cf6b39a827acd2a090e48f52467e2bd55458d8f
+2025-07-09T23:04:53.004520Z LOG pgloader version "3.6.7~devel"
+2025-07-09T23:04:53.523235Z LOG Migrating from #<SQLITE-CONNECTION sqlite:///data/base.sqlite #x30200209213D>
+2025-07-09T23:04:53.523590Z LOG Migrating into #<PGSQL-CONNECTION pgsql://postgres@localhost:15432/postgres #x302002091FED>
+2025-07-09T23:04:55.665992Z ERROR Database error 22P02: invalid input syntax for type bigint: "NIL"
+CONTEXT: COPY player, line 1, column height: "NIL"
+2025-07-09T23:05:06.325095Z ERROR Bug (probably): can't determine class of #<BOGUS object @ #x302032DF270D>
+2025-07-09T23:05:26.846933Z ERROR PostgreSQL Database error 23503: insert or update on table "player_attributes" violates foreign key constraint "player_attributes_player_api_id_fkey"
+DETAIL: Key (player_api_id)=(505942) is not present in table "player".
+QUERY: ALTER TABLE player_attributes ADD FOREIGN KEY(player_api_id) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:05:26.849313Z ERROR PostgreSQL Database error 23503: insert or update on table "player_attributes" violates foreign key constraint "player_attributes_player_fifa_api_id_fkey"
+DETAIL: Key (player_fifa_api_id)=(218353) is not present in table "player".
+QUERY: ALTER TABLE player_attributes ADD FOREIGN KEY(player_fifa_api_id) REFERENCES player(player_fifa_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:05:26.851749Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_11_fkey"
+DETAIL: Key (away_player_11)=(149909) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_11) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:05:26.854321Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_10_fkey"
+DETAIL: Key (away_player_10)=(58346) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_10) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:05:26.857068Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_9_fkey"
+DETAIL: Key (away_player_9)=(188498) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_9) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:05:26.859492Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_8_fkey"
+DETAIL: Key (away_player_8)=(240837) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_8) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:05:26.863593Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_7_fkey"
+DETAIL: Key (away_player_7)=(37087) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_7) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:05:26.866273Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_6_fkey"
+DETAIL: Key (away_player_6)=(36771) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_6) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:05:26.869054Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_5_fkey"
+DETAIL: Key (away_player_5)=(355358) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_5) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:05:26.872212Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_4_fkey"
+DETAIL: Key (away_player_4)=(10950) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_4) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:05:26.874084Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_3_fkey"
+DETAIL: Key (away_player_3)=(303912) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_3) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:05:26.876138Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_2_fkey"
+DETAIL: Key (away_player_2)=(303913) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_2) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:05:26.878681Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_1_fkey"
+DETAIL: Key (away_player_1)=(178778) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_1) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:05:26.881833Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_11_fkey"
+DETAIL: Key (home_player_11)=(93447) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_11) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:05:26.884317Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_10_fkey"
+DETAIL: Key (home_player_10)=(129944) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_10) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:05:26.885950Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_9_fkey"
+DETAIL: Key (home_player_9)=(177714) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_9) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:05:26.887290Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_8_fkey"
+DETAIL: Key (home_player_8)=(43319) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_8) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:05:26.888830Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_7_fkey"
+DETAIL: Key (home_player_7)=(27365) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_7) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:05:26.890271Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_6_fkey"
+DETAIL: Key (home_player_6)=(178818) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_6) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:05:26.891636Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_5_fkey"
+DETAIL: Key (home_player_5)=(94685) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_5) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:05:26.893054Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_4_fkey"
+DETAIL: Key (home_player_4)=(20396) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_4) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:05:26.894729Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_3_fkey"
+DETAIL: Key (home_player_3)=(71399) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_3) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:05:26.897285Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_2_fkey"
+DETAIL: Key (home_player_2)=(13518) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_2) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:05:26.899459Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_1_fkey"
+DETAIL: Key (home_player_1)=(27358) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_1) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:05:26.939414Z ERROR PostgreSQL Database error 42830: there is no unique constraint matching given keys for referenced table "team"
+QUERY: ALTER TABLE team_attributes ADD FOREIGN KEY(team_fifa_api_id) REFERENCES team(team_fifa_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:05:26.942405Z LOG report summary reset
+             table name     errors       rows      bytes      total time
+-----------------------  ---------  ---------  ---------  --------------
+                  fetch          0          0                     0.000s
+            before load          0          2                     0.255s
+        fetch meta data          0         49                     0.009s
+         Create Schemas          0          0                     0.001s
+       Create SQL Types          0          0                     0.001s
+          Create tables          0         14                     0.055s
+         Set Table OIDs          0          7                     0.001s
+-----------------------  ---------  ---------  ---------  --------------
+      player_attributes          1     144839    22.2 MB         27.994s
+                 player          1          0                     1.811s
+                  match          0      25979   267.1 MB         31.607s
+                 league          0         11     0.3 kB          1.344s
+                country          0         11     0.1 kB          3.027s
+                   team          0        299     9.6 kB          3.247s
+        team_attributes          0       1458   211.4 kB          3.215s
+-----------------------  ---------  ---------  ---------  --------------
+COPY Threads Completion          0          4                    31.703s
+         Create Indexes          0         13                     0.298s
+ Index Build Completion          0         13                     0.647s
+        Reset Sequences          0          7                     0.285s
+           Primary Keys          0          7                     0.011s
+    Create Foreign Keys         25          4                     0.102s
+        Create Triggers          0          0                     0.001s
+       Install Comments          0          0                     0.000s
+-----------------------  ---------  ---------  ---------  --------------
+      Total import time          2     172597   289.5 MB         33.046s
+pgloader
+Total reclaimed space: 0B
+ccl.latest: Pulling from dimitri/pgloader
+Digest: sha256:f6ab423661145fe71be3edec2cec4341facc88c5ce52d755a2d6f3ae73614c0b
+Status: Image is up to date for dimitri/pgloader:ccl.latest
+docker.io/dimitri/pgloader:ccl.latest
+0838b55606b7ca45a961662113f045a66a38e049745ac4ad8ec160f8b7bac549
+2025-07-09T23:08:35.002638Z LOG pgloader version "3.6.7~devel"
+2025-07-09T23:08:35.516620Z LOG Migrating from #<SQLITE-CONNECTION sqlite:///data/base.sqlite #x3020020921AD>
+2025-07-09T23:08:35.516974Z LOG Migrating into #<PGSQL-CONNECTION pgsql://postgres@localhost:15432/postgres #x30200209205D>
+2025-07-09T23:08:37.859280Z ERROR Database error 22P02: invalid input syntax for type bigint: "NIL"
+CONTEXT: COPY player, line 1, column height: "NIL"
+2025-07-09T23:08:47.342426Z ERROR Error while formatting a row from "match":
+2025-07-09T23:08:47.344067Z ERROR There is no applicable method for the generic function:
+  #<STANDARD-GENERIC-FUNCTION CLOSE #x302000058DFF>
+when called with arguments:
+  (#<BOGUS object @ #x3020364E32CD>)
+2025-07-09T23:08:47.347767Z ERROR The value NIL is not of the expected type NUMBER.
+2025-07-09T23:08:47.349565Z WARNING PostgreSQL warning: there is no transaction in progress
+2025-07-09T23:09:02.619973Z ERROR PostgreSQL Database error 23503: insert or update on table "player_attributes" violates foreign key constraint "player_attributes_player_api_id_fkey"
+DETAIL: Key (player_api_id)=(505942) is not present in table "player".
+QUERY: ALTER TABLE player_attributes ADD FOREIGN KEY(player_api_id) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:09:02.621989Z ERROR PostgreSQL Database error 23503: insert or update on table "player_attributes" violates foreign key constraint "player_attributes_player_fifa_api_id_fkey"
+DETAIL: Key (player_fifa_api_id)=(218353) is not present in table "player".
+QUERY: ALTER TABLE player_attributes ADD FOREIGN KEY(player_fifa_api_id) REFERENCES player(player_fifa_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:09:02.624047Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_11_fkey"
+DETAIL: Key (away_player_11)=(46552) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_11) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:09:02.625568Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_10_fkey"
+DETAIL: Key (away_player_10)=(38383) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_10) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:09:02.627300Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_9_fkey"
+DETAIL: Key (away_player_9)=(106013) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_9) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:09:02.628883Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_8_fkey"
+DETAIL: Key (away_player_8)=(38253) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_8) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:09:02.630661Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_7_fkey"
+DETAIL: Key (away_player_7)=(30949) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_7) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:09:02.632380Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_6_fkey"
+DETAIL: Key (away_player_6)=(38798) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_6) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:09:02.633909Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_5_fkey"
+DETAIL: Key (away_player_5)=(38389) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_5) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:09:02.635519Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_4_fkey"
+DETAIL: Key (away_player_4)=(13423) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_4) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:09:02.637001Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_3_fkey"
+DETAIL: Key (away_player_3)=(26458) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_3) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:09:02.638881Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_2_fkey"
+DETAIL: Key (away_player_2)=(38388) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_2) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:09:02.640764Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_1_fkey"
+DETAIL: Key (away_player_1)=(34480) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_1) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:09:02.642564Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_11_fkey"
+DETAIL: Key (home_player_11)=(94289) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_11) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:09:02.644414Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_10_fkey"
+DETAIL: Key (home_player_10)=(38801) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_10) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:09:02.646493Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_9_fkey"
+DETAIL: Key (home_player_9)=(26916) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_9) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:09:02.648675Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_8_fkey"
+DETAIL: Key (home_player_8)=(67898) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_8) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:09:02.650606Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_7_fkey"
+DETAIL: Key (home_player_7)=(148286) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_7) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:09:02.652522Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_6_fkey"
+DETAIL: Key (home_player_6)=(36393) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_6) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:09:02.655476Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_5_fkey"
+DETAIL: Key (home_player_5)=(26235) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_5) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:09:02.657720Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_4_fkey"
+DETAIL: Key (home_player_4)=(38312) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_4) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:09:02.659335Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_3_fkey"
+DETAIL: Key (home_player_3)=(38788) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_3) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:09:02.660908Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_2_fkey"
+DETAIL: Key (home_player_2)=(67950) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_2) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:09:02.662517Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_1_fkey"
+DETAIL: Key (home_player_1)=(39890) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_1) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:09:02.674632Z ERROR PostgreSQL Database error 42830: there is no unique constraint matching given keys for referenced table "team"
+QUERY: ALTER TABLE team_attributes ADD FOREIGN KEY(team_fifa_api_id) REFERENCES team(team_fifa_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:09:02.677307Z LOG report summary reset
+             table name     errors       rows      bytes      total time
+-----------------------  ---------  ---------  ---------  --------------
+                  fetch          0          0                     0.000s
+            before load          0          2                     0.260s
+        fetch meta data          0         49                     0.009s
+         Create Schemas          0          0                     0.000s
+       Create SQL Types          0          0                     0.001s
+          Create tables          0         14                     0.023s
+         Set Table OIDs          0          7                     0.000s
+-----------------------  ---------  ---------  ---------  --------------
+      player_attributes          0     183978    28.3 MB         25.887s
+                 player          1          0                     2.023s
+                  match          2          0                    11.427s
+                 league          0         11     0.3 kB          3.023s
+                country          0         11     0.1 kB          1.831s
+                   team          0        299     9.6 kB          2.370s
+        team_attributes          0       1458   211.4 kB          2.351s
+-----------------------  ---------  ---------  ---------  --------------
+COPY Threads Completion          0          4                    25.874s
+         Create Indexes          0         13                     0.117s
+ Index Build Completion          0         13                     0.375s
+        Reset Sequences          0          7                     0.267s
+           Primary Keys          0          7                     0.008s
+    Create Foreign Keys         25          4                     0.057s
+        Create Triggers          0          0                     0.001s
+       Install Comments          0          0                     0.000s
+-----------------------  ---------  ---------  ---------  --------------
+      Total import time          3     185757    28.5 MB         26.699s
+pgloader
+Total reclaimed space: 0B
+ccl.latest: Pulling from dimitri/pgloader
+Digest: sha256:f6ab423661145fe71be3edec2cec4341facc88c5ce52d755a2d6f3ae73614c0b
+Status: Image is up to date for dimitri/pgloader:ccl.latest
+docker.io/dimitri/pgloader:ccl.latest
+4d252c9189bf9fcb1e70e9001b0ecf99367a5363b77e0c84ac7965bfd9aa1030
+2025-07-09T23:12:15.001106Z LOG pgloader version "3.6.7~devel"
+2025-07-09T23:12:15.506232Z LOG Migrating from #<SQLITE-CONNECTION sqlite:///data/base.sqlite #x30200209210D>
+2025-07-09T23:12:15.506567Z LOG Migrating into #<PGSQL-CONNECTION pgsql://postgres@localhost:15432/postgres #x302002091FBD>
+2025-07-09T23:12:17.861129Z ERROR Database error 22P02: invalid input syntax for type bigint: "NIL"
+CONTEXT: COPY player, line 1, column height: "NIL"
+Unhandled exception 11 at 0x41dc44, context->regs at #x7f9c1943e4c8
+Exception occurred while executing foreign code
+ at set_n_bits + 116
+received signal 11; faulting address: 0x307e3fef7000
+invalid permissions for mapped object
+? for help
+[7] Clozure CL kernel debugger: pgloader
+Total reclaimed space: 0B
+ccl.latest: Pulling from dimitri/pgloader
+Digest: sha256:f6ab423661145fe71be3edec2cec4341facc88c5ce52d755a2d6f3ae73614c0b
+Status: Image is up to date for dimitri/pgloader:ccl.latest
+docker.io/dimitri/pgloader:ccl.latest
+3c1322d5134724a9dd49765dd24e74982f0a2b1040e8741e5fee074c80dfacdc
+2025-07-09T23:16:12.005456Z LOG pgloader version "3.6.7~devel"
+2025-07-09T23:16:12.538398Z LOG Migrating from #<SQLITE-CONNECTION sqlite:///data/base.sqlite #x30200209213D>
+2025-07-09T23:16:12.538585Z LOG Migrating into #<PGSQL-CONNECTION pgsql://postgres@localhost:15432/postgres #x302002091FED>
+2025-07-09T23:16:14.537232Z ERROR Database error 22P02: invalid input syntax for type bigint: "NIL"
+CONTEXT: COPY player, line 1, column height: "NIL"
+ccl.latest: Pulling from dimitri/pgloader
+Digest: sha256:f6ab423661145fe71be3edec2cec4341facc88c5ce52d755a2d6f3ae73614c0b
+Status: Image is up to date for dimitri/pgloader:ccl.latest
+docker.io/dimitri/pgloader:ccl.latest
+3638277c60ce9144bb8e6a9be360f579c811100dde9f6805bc546534c26f54c3
+2025-07-09T23:16:36.005353Z LOG pgloader version "3.6.7~devel"
+2025-07-09T23:16:36.522283Z LOG Migrating from #<SQLITE-CONNECTION sqlite:///data/base.sqlite #x30200209213D>
+2025-07-09T23:16:36.522454Z LOG Migrating into #<PGSQL-CONNECTION pgsql://postgres@localhost:15432/postgres #x302002091FED>
+2025-07-09T23:16:38.447626Z ERROR Database error 22P02: invalid input syntax for type bigint: "NIL"
+CONTEXT: COPY player, line 1, column height: "NIL"
+ccl.latest: Pulling from dimitri/pgloader
+Digest: sha256:f6ab423661145fe71be3edec2cec4341facc88c5ce52d755a2d6f3ae73614c0b
+Status: Image is up to date for dimitri/pgloader:ccl.latest
+docker.io/dimitri/pgloader:ccl.latest
+ccl.latest: Pulling from dimitri/pgloader
+Digest: sha256:f6ab423661145fe71be3edec2cec4341facc88c5ce52d755a2d6f3ae73614c0b
+Status: Image is up to date for dimitri/pgloader:ccl.latest
+docker.io/dimitri/pgloader:ccl.latest
+03dc78e98a6feaca32e9ba11cdd055e2a89afb686179071a710ebef4689b8f25
+2025-07-09T23:18:00.001020Z LOG pgloader version "3.6.7~devel"
+KABOOM!
+ESRAP-PARSE-ERROR: At
+
+  
+  CAST type text to bigint drop typemod using zero-dates-to-null, null-if('NIL')
+  
+                                                                  ^ (Line 9, Column 64, Position 300)
+
+In context ANOTHER-CAST-RULE:While parsing ANOTHER-CAST-RULE. Expected:     the character Tab  or the character Newline  or the character Return  or the character Space  or the string "--"  or the string "/*"  or the string "column"  or the string "type"
+An unhandled error condition has been signalled: At
+
+  
+  CAST type text to bigint drop typemod using zero-dates-to-null, null-if('NIL')
+  
+                                                                  ^ (Line 9, Column 64, Position 300)
+
+In context ANOTHER-CAST-RULE:While parsing ANOTHER-CAST-RULE. Expected:     the character Tab  or the character Newline  or the character Return  or the character Space  or the string "--"  or the string "/*"  or the string "column"  or the string "type"
+
+
+
+
+What I am doing here?
+
+At
+
+  
+  CAST type text to bigint drop typemod using zero-dates-to-null, null-if('NIL')
+  
+                                                                  ^ (Line 9, Column 64, Position 300)
+
+In context ANOTHER-CAST-RULE:While parsing ANOTHER-CAST-RULE. Expected:     the character Tab  or the character Newline  or the character Return  or the character Space  or the string "--"  or the string "/*"  or the string "column"  or the string "type"
+
+pgloader
+Total reclaimed space: 0B
+ccl.latest: Pulling from dimitri/pgloader
+Digest: sha256:f6ab423661145fe71be3edec2cec4341facc88c5ce52d755a2d6f3ae73614c0b
+Status: Image is up to date for dimitri/pgloader:ccl.latest
+docker.io/dimitri/pgloader:ccl.latest
+97f5c052c43050fb211eb929721135ffd32f89a62c1a73494541d482b51b0690
+2025-07-09T23:18:35.000608Z LOG pgloader version "3.6.7~devel"
+KABOOM!
+ESRAP-PARSE-ERROR: At
+
+  
+  WITH include drop, create tables, create indexes, reset sequences, null if 'NIL'
+  
+                                                                   ^ (Line 5, Column 65, Position 177)
+
+In context SQLITE-OPTIONS:While parsing SQLITE-OPTIONS. Expected:     the character Tab  or the character Newline  or the character Return  or the character Space  or the string "--"  or the string "/*"  or the string "batch"  or the string "concurrency"  or the string "create"  or the string "data"  or the string "disable"  or the string "downcase"  or the string "drop"  or the string "encoding"  or the string "foreign"  or the string "include"  or the string "max"  or the string "no"  or the string "on"  or the string "prefetch"  or the string "preserve"  or the string "quote"  or the string "reset"  or the string "schema"  or the string "snake_case"  or the string "truncate"  or the string "uniquify"  or the string "workers"
+An unhandled error condition has been signalled: At
+
+  
+  WITH include drop, create tables, create indexes, reset sequences, null if 'NIL'
+  
+                                                                   ^ (Line 5, Column 65, Position 177)
+
+In context SQLITE-OPTIONS:While parsing SQLITE-OPTIONS. Expected:     the character Tab  or the character Newline  or the character Return  or the character Space  or the string "--"  or the string "/*"  or the string "batch"  or the string "concurrency"  or the string "create"  or the string "data"  or the string "disable"  or the string "downcase"  or the string "drop"  or the string "encoding"  or the string "foreign"  or the string "include"  or the string "max"  or the string "no"  or the string "on"  or the string "prefetch"  or the string "preserve"  or the string "quote"  or the string "reset"  or the string "schema"  or the string "snake_case"  or the string "truncate"  or the string "uniquify"  or the string "workers"
+
+
+
+
+What I am doing here?
+
+At
+
+  
+  WITH include drop, create tables, create indexes, reset sequences, null if 'NIL'
+  
+                                                                   ^ (Line 5, Column 65, Position 177)
+
+In context SQLITE-OPTIONS:While parsing SQLITE-OPTIONS. Expected:     the character Tab  or the character Newline  or the character Return  or the character Space  or the string "--"  or the string "/*"  or the string "batch"  or the string "concurrency"  or the string "create"  or the string "data"  or the string "disable"  or the string "downcase"  or the string "drop"  or the string "encoding"  or the string "foreign"  or the string "include"  or the string "max"  or the string "no"  or the string "on"  or the string "prefetch"  or the string "preserve"  or the string "quote"  or the string "reset"  or the string "schema"  or the string "snake_case"  or the string "truncate"  or the string "uniquify"  or the string "workers"
+
+pgloader
+Total reclaimed space: 0B
+ccl.latest: Pulling from dimitri/pgloader
+Digest: sha256:f6ab423661145fe71be3edec2cec4341facc88c5ce52d755a2d6f3ae73614c0b
+Status: Image is up to date for dimitri/pgloader:ccl.latest
+docker.io/dimitri/pgloader:ccl.latest
+8d5be741d00444c150596b44ed8322f2ce2f6128eab02432aa0b0f9a125aa2b9
+2025-07-09T23:19:16.000681Z LOG pgloader version "3.6.7~devel"
+KABOOM!
+ESRAP-PARSE-ERROR: At
+
+    -- Vamos usar a forma mais comum para lidar com isso, que é definir o valor nulo globalmente:
+    SET null value 'NIL'
+  
+            ^ (Line 14, Column 10, Position 599)
+
+In context GENERIC-OPTION:While parsing GENERIC-OPTION. Expected:     the character Tab  or the character Newline  or the character Return  or the character Space  or the string "--"  or the string "/*"  or the character =  or the string "to"
+An unhandled error condition has been signalled: At
+
+    -- Vamos usar a forma mais comum para lidar com isso, que é definir o valor nulo globalmente:
+    SET null value 'NIL'
+  
+            ^ (Line 14, Column 10, Position 599)
+
+In context GENERIC-OPTION:While parsing GENERIC-OPTION. Expected:     the character Tab  or the character Newline  or the character Return  or the character Space  or the string "--"  or the string "/*"  or the character =  or the string "to"
+
+
+
+
+What I am doing here?
+
+At
+
+    -- Vamos usar a forma mais comum para lidar com isso, que é definir o valor nulo globalmente:
+    SET null value 'NIL'
+  
+            ^ (Line 14, Column 10, Position 599)
+
+In context GENERIC-OPTION:While parsing GENERIC-OPTION. Expected:     the character Tab  or the character Newline  or the character Return  or the character Space  or the string "--"  or the string "/*"  or the character =  or the string "to"
+
+pgloader
+Total reclaimed space: 0B
+ccl.latest: Pulling from dimitri/pgloader
+Digest: sha256:f6ab423661145fe71be3edec2cec4341facc88c5ce52d755a2d6f3ae73614c0b
+Status: Image is up to date for dimitri/pgloader:ccl.latest
+docker.io/dimitri/pgloader:ccl.latest
+07a73a598b46d511f35e768ced9b4cc22527b78e6ed3f1b7b691f616d3321241
+2025-07-09T23:19:28.000989Z LOG pgloader version "3.6.7~devel"
+KABOOM!
+ESRAP-PARSE-ERROR: At
+
+  
+    SET null value 'NIL'
+  
+            ^ (Line 11, Column 10, Position 285)
+
+In context GENERIC-OPTION:While parsing GENERIC-OPTION. Expected:     the character Tab  or the character Newline  or the character Return  or the character Space  or the string "--"  or the string "/*"  or the character =  or the string "to"
+An unhandled error condition has been signalled: At
+
+  
+    SET null value 'NIL'
+  
+            ^ (Line 11, Column 10, Position 285)
+
+In context GENERIC-OPTION:While parsing GENERIC-OPTION. Expected:     the character Tab  or the character Newline  or the character Return  or the character Space  or the string "--"  or the string "/*"  or the character =  or the string "to"
+
+
+
+
+What I am doing here?
+
+At
+
+  
+    SET null value 'NIL'
+  
+            ^ (Line 11, Column 10, Position 285)
+
+In context GENERIC-OPTION:While parsing GENERIC-OPTION. Expected:     the character Tab  or the character Newline  or the character Return  or the character Space  or the string "--"  or the string "/*"  or the character =  or the string "to"
+
+pgloader
+Total reclaimed space: 0B
+ccl.latest: Pulling from dimitri/pgloader
+Digest: sha256:f6ab423661145fe71be3edec2cec4341facc88c5ce52d755a2d6f3ae73614c0b
+Status: Image is up to date for dimitri/pgloader:ccl.latest
+docker.io/dimitri/pgloader:ccl.latest
+2cbd16152dd6dd5fb34802c203903266506d8d2956c60bbb6bbf9cd68bd8dad0
+2025-07-09T23:19:43.000932Z LOG pgloader version "3.6.7~devel"
+KABOOM!
+ESRAP-PARSE-ERROR: At
+
+  
+  WITH include drop, create tables, create indexes, reset sequences, null if 'NIL'
+  
+                                                                   ^ (Line 5, Column 65, Position 177)
+
+In context SQLITE-OPTIONS:While parsing SQLITE-OPTIONS. Expected:     the character Tab  or the character Newline  or the character Return  or the character Space  or the string "--"  or the string "/*"  or the string "batch"  or the string "concurrency"  or the string "create"  or the string "data"  or the string "disable"  or the string "downcase"  or the string "drop"  or the string "encoding"  or the string "foreign"  or the string "include"  or the string "max"  or the string "no"  or the string "on"  or the string "prefetch"  or the string "preserve"  or the string "quote"  or the string "reset"  or the string "schema"  or the string "snake_case"  or the string "truncate"  or the string "uniquify"  or the string "workers"
+An unhandled error condition has been signalled: At
+
+  
+  WITH include drop, create tables, create indexes, reset sequences, null if 'NIL'
+  
+                                                                   ^ (Line 5, Column 65, Position 177)
+
+In context SQLITE-OPTIONS:While parsing SQLITE-OPTIONS. Expected:     the character Tab  or the character Newline  or the character Return  or the character Space  or the string "--"  or the string "/*"  or the string "batch"  or the string "concurrency"  or the string "create"  or the string "data"  or the string "disable"  or the string "downcase"  or the string "drop"  or the string "encoding"  or the string "foreign"  or the string "include"  or the string "max"  or the string "no"  or the string "on"  or the string "prefetch"  or the string "preserve"  or the string "quote"  or the string "reset"  or the string "schema"  or the string "snake_case"  or the string "truncate"  or the string "uniquify"  or the string "workers"
+
+
+
+
+What I am doing here?
+
+At
+
+  
+  WITH include drop, create tables, create indexes, reset sequences, null if 'NIL'
+  
+                                                                   ^ (Line 5, Column 65, Position 177)
+
+In context SQLITE-OPTIONS:While parsing SQLITE-OPTIONS. Expected:     the character Tab  or the character Newline  or the character Return  or the character Space  or the string "--"  or the string "/*"  or the string "batch"  or the string "concurrency"  or the string "create"  or the string "data"  or the string "disable"  or the string "downcase"  or the string "drop"  or the string "encoding"  or the string "foreign"  or the string "include"  or the string "max"  or the string "no"  or the string "on"  or the string "prefetch"  or the string "preserve"  or the string "quote"  or the string "reset"  or the string "schema"  or the string "snake_case"  or the string "truncate"  or the string "uniquify"  or the string "workers"
+
+pgloader
+Total reclaimed space: 0B
+ccl.latest: Pulling from dimitri/pgloader
+Digest: sha256:f6ab423661145fe71be3edec2cec4341facc88c5ce52d755a2d6f3ae73614c0b
+Status: Image is up to date for dimitri/pgloader:ccl.latest
+docker.io/dimitri/pgloader:ccl.latest
+bfa6fea96c79f7962f7e35dc8a9c5efbecf82892d330e0972c8124056c8e98b7
+2025-07-09T23:23:16.001381Z LOG pgloader version "3.6.7~devel"
+KABOOM!
+ESRAP-PARSE-ERROR: At
+
+  
+  CAST column player.height to bigint using null-if('NIL'),
+  
+                                                   ^ (Line 9, Column 49, Position 285)
+
+In context COMMAND:While parsing COMMAND. Problem:  The production
+                                                    
+                                                      #\(
+                                                    
+                                                    does not satisfy the predicate PGLOADER.PARSER::FUNCTION-NAME-CHARACTER-P.Expected:     the character Tab  or the character Newline  or the character Return  or the character Space  or the character ,  or the string "--"  or the string "/*"  or the character :  or the string "::"  or the character ;  or the string "after"  or the string "alter"  or the string "before"  or the string "cast"  or the string "excluding"  or the string "including"  or the string "set"  or the string "with"  or any character satisfying FUNCTION-NAME-CHARACTER-P
+An unhandled error condition has been signalled: At
+
+  
+  CAST column player.height to bigint using null-if('NIL'),
+  
+                                                   ^ (Line 9, Column 49, Position 285)
+
+In context COMMAND:While parsing COMMAND. Problem:  The production
+                                                    
+                                                      #\(
+                                                    
+                                                    does not satisfy the predicate PGLOADER.PARSER::FUNCTION-NAME-CHARACTER-P.Expected:     the character Tab  or the character Newline  or the character Return  or the character Space  or the character ,  or the string "--"  or the string "/*"  or the character :  or the string "::"  or the character ;  or the string "after"  or the string "alter"  or the string "before"  or the string "cast"  or the string "excluding"  or the string "including"  or the string "set"  or the string "with"  or any character satisfying FUNCTION-NAME-CHARACTER-P
+
+
+
+
+What I am doing here?
+
+At
+
+  
+  CAST column player.height to bigint using null-if('NIL'),
+  
+                                                   ^ (Line 9, Column 49, Position 285)
+
+In context COMMAND:While parsing COMMAND. Problem:  The production
+                                                    
+                                                      #\(
+                                                    
+                                                    does not satisfy the predicate PGLOADER.PARSER::FUNCTION-NAME-CHARACTER-P.Expected:     the character Tab  or the character Newline  or the character Return  or the character Space  or the character ,  or the string "--"  or the string "/*"  or the character :  or the string "::"  or the character ;  or the string "after"  or the string "alter"  or the string "before"  or the string "cast"  or the string "excluding"  or the string "including"  or the string "set"  or the string "with"  or any character satisfying FUNCTION-NAME-CHARACTER-P
+
+pgloader
+Total reclaimed space: 0B
+ccl.latest: Pulling from dimitri/pgloader
+Digest: sha256:f6ab423661145fe71be3edec2cec4341facc88c5ce52d755a2d6f3ae73614c0b
+Status: Image is up to date for dimitri/pgloader:ccl.latest
+docker.io/dimitri/pgloader:ccl.latest
+3a3a925fd46a77c90626d5a396e50763f2137fc5adbc784eb140616739effc30
+2025-07-09T23:24:22.001777Z LOG pgloader version "3.6.7~devel"
+KABOOM!
+UNBOUND-VARIABLE: Unbound variable: PGLOADER.USER-SYMBOLS::%S
+An unhandled error condition has been signalled: Unbound variable: PGLOADER.USER-SYMBOLS::%S
+
+
+
+
+What I am doing here?
+
+Unbound variable: PGLOADER.USER-SYMBOLS::%S
+
+pgloader
+Total reclaimed space: 0B
+ccl.latest: Pulling from dimitri/pgloader
+Digest: sha256:f6ab423661145fe71be3edec2cec4341facc88c5ce52d755a2d6f3ae73614c0b
+Status: Image is up to date for dimitri/pgloader:ccl.latest
+docker.io/dimitri/pgloader:ccl.latest
+b483b601a1ceb6a90f4ec13286a87670bc35fbd305a7a6543f5f0e5d605c3157
+2025-07-09T23:25:06.000880Z LOG pgloader version "3.6.7~devel"
+KABOOM!
+UNBOUND-VARIABLE: Unbound variable: PGLOADER.USER-SYMBOLS::%V
+An unhandled error condition has been signalled: Unbound variable: PGLOADER.USER-SYMBOLS::%V
+
+
+
+
+What I am doing here?
+
+Unbound variable: PGLOADER.USER-SYMBOLS::%V
+
+pgloader
+Total reclaimed space: 0B
+ccl.latest: Pulling from dimitri/pgloader
+Digest: sha256:f6ab423661145fe71be3edec2cec4341facc88c5ce52d755a2d6f3ae73614c0b
+Status: Image is up to date for dimitri/pgloader:ccl.latest
+docker.io/dimitri/pgloader:ccl.latest
+4abe43f5a4602620075961be136afddabe5a34c8ab4cff4dcfc52980d572fdb1
+2025-07-09T23:47:50.007685Z LOG pgloader version "3.6.7~devel"
+2025-07-09T23:47:50.549306Z LOG Migrating from #<SQLITE-CONNECTION sqlite:///data/base.sqlite #x3020020921AD>
+2025-07-09T23:47:50.549597Z LOG Migrating into #<PGSQL-CONNECTION pgsql://postgres@localhost:15432/postgres #x30200209205D>
+2025-07-09T23:47:52.179872Z ERROR Database error 22P02: invalid input syntax for type bigint: "NIL"
+CONTEXT: COPY player, line 1, column height: "NIL"
+2025-07-09T23:48:06.981528Z ERROR The value #<BOGUS object @ #x302029D939AD> is not of the expected type MACPTR.
+2025-07-09T23:48:26.448313Z ERROR PostgreSQL Database error 23503: insert or update on table "player_attributes" violates foreign key constraint "player_attributes_player_api_id_fkey"
+DETAIL: Key (player_api_id)=(505942) is not present in table "player".
+QUERY: ALTER TABLE player_attributes ADD FOREIGN KEY(player_api_id) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:48:26.450677Z ERROR PostgreSQL Database error 23503: insert or update on table "player_attributes" violates foreign key constraint "player_attributes_player_fifa_api_id_fkey"
+DETAIL: Key (player_fifa_api_id)=(218353) is not present in table "player".
+QUERY: ALTER TABLE player_attributes ADD FOREIGN KEY(player_fifa_api_id) REFERENCES player(player_fifa_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:48:26.453195Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_11_fkey"
+DETAIL: Key (away_player_11)=(46552) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_11) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:48:26.455769Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_10_fkey"
+DETAIL: Key (away_player_10)=(38383) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_10) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:48:26.458171Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_9_fkey"
+DETAIL: Key (away_player_9)=(106013) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_9) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:48:26.461061Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_8_fkey"
+DETAIL: Key (away_player_8)=(38253) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_8) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:48:26.463003Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_7_fkey"
+DETAIL: Key (away_player_7)=(30949) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_7) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:48:26.464672Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_6_fkey"
+DETAIL: Key (away_player_6)=(38798) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_6) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:48:26.467086Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_5_fkey"
+DETAIL: Key (away_player_5)=(38389) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_5) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:48:26.468978Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_4_fkey"
+DETAIL: Key (away_player_4)=(13423) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_4) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:48:26.470650Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_3_fkey"
+DETAIL: Key (away_player_3)=(26458) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_3) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:48:26.472232Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_2_fkey"
+DETAIL: Key (away_player_2)=(38388) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_2) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:48:26.474248Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_1_fkey"
+DETAIL: Key (away_player_1)=(34480) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_1) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:48:26.475930Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_11_fkey"
+DETAIL: Key (home_player_11)=(94289) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_11) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:48:26.477890Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_10_fkey"
+DETAIL: Key (home_player_10)=(38801) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_10) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:48:26.479741Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_9_fkey"
+DETAIL: Key (home_player_9)=(26916) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_9) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:48:26.482107Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_8_fkey"
+DETAIL: Key (home_player_8)=(67898) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_8) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:48:26.484145Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_7_fkey"
+DETAIL: Key (home_player_7)=(148286) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_7) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:48:26.485770Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_6_fkey"
+DETAIL: Key (home_player_6)=(36393) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_6) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:48:26.487509Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_5_fkey"
+DETAIL: Key (home_player_5)=(26235) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_5) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:48:26.488936Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_4_fkey"
+DETAIL: Key (home_player_4)=(38312) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_4) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:48:26.490298Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_3_fkey"
+DETAIL: Key (home_player_3)=(38788) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_3) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:48:26.491672Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_2_fkey"
+DETAIL: Key (home_player_2)=(67950) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_2) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:48:26.493057Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_1_fkey"
+DETAIL: Key (home_player_1)=(39890) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_1) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:48:26.658046Z ERROR PostgreSQL Database error 42830: there is no unique constraint matching given keys for referenced table "team"
+QUERY: ALTER TABLE team_attributes ADD FOREIGN KEY(team_fifa_api_id) REFERENCES team(team_fifa_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:48:26.699715Z LOG report summary reset
+             table name     errors       rows      bytes      total time
+-----------------------  ---------  ---------  ---------  --------------
+                  fetch          0          0                     0.000s
+            before load          0          2                     0.247s
+        fetch meta data          0         49                     0.013s
+         Create Schemas          0          0                     0.001s
+       Create SQL Types          0          0                     0.001s
+          Create tables          0         14                     0.031s
+         Set Table OIDs          0          7                     0.001s
+-----------------------  ---------  ---------  ---------  --------------
+      player_attributes          1     170923    26.2 MB         32.089s
+                 player          1          0                     1.394s
+                  match          0      25979   267.1 MB         34.303s
+                 league          0         11     0.3 kB          1.197s
+                country          0         11     0.1 kB          3.098s
+                   team          0        299     9.6 kB          2.595s
+        team_attributes          0       1458   211.4 kB          2.763s
+-----------------------  ---------  ---------  ---------  --------------
+COPY Threads Completion          0          4                    34.377s
+         Create Indexes          0         13                     0.471s
+ Index Build Completion          0         13                     0.633s
+        Reset Sequences          0          7                     0.288s
+           Primary Keys          0          7                     0.009s
+    Create Foreign Keys         25          4                     0.213s
+        Create Triggers          0          0                     0.001s
+       Install Comments          0          0                     0.000s
+-----------------------  ---------  ---------  ---------  --------------
+      Total import time          2     198681   293.5 MB         35.992s
+pgloader
+Total reclaimed space: 0B
+ccl.latest: Pulling from dimitri/pgloader
+Digest: sha256:f6ab423661145fe71be3edec2cec4341facc88c5ce52d755a2d6f3ae73614c0b
+Status: Image is up to date for dimitri/pgloader:ccl.latest
+docker.io/dimitri/pgloader:ccl.latest
+cf0e972445ec27db0064ef07d7ea88b4fedb3c09ac8509d4a4b06767239b7816
+2025-07-09T23:54:40.006205Z LOG pgloader version "3.6.7~devel"
+KABOOM!
+DB-CONNECTION-ERROR: Failed to connect to pgsql at "localhost" (port 15432) as user "postgres": Connection refused (error #111) during attempt to connect to 127.0.0.1:15432
+An unhandled error condition has been signalled: Failed to connect to pgsql at "localhost" (port 15432) as user "postgres": Connection refused (error #111) during attempt to connect to 127.0.0.1:15432
+
+
+
+
+What I am doing here?
+
+Failed to connect to pgsql at "localhost" (port 15432) as user "postgres": Connection refused (error #111) during attempt to connect to 127.0.0.1:15432
+
+pgloader
+Total reclaimed space: 0B
+ccl.latest: Pulling from dimitri/pgloader
+Digest: sha256:f6ab423661145fe71be3edec2cec4341facc88c5ce52d755a2d6f3ae73614c0b
+Status: Image is up to date for dimitri/pgloader:ccl.latest
+docker.io/dimitri/pgloader:ccl.latest
+3d9f2e5b43ecca60ab324d970c294a261df033ce811a7d10e5c96dbdd8428905
+2025-07-09T23:56:53.001223Z LOG pgloader version "3.6.7~devel"
+2025-07-09T23:56:53.538756Z LOG Migrating from #<SQLITE-CONNECTION sqlite:///data/base.sqlite #x30200209213D>
+2025-07-09T23:56:53.538942Z LOG Migrating into #<PGSQL-CONNECTION pgsql://postgres@localhost:15432/postgres #x302002091FED>
+2025-07-09T23:56:55.401627Z ERROR Database error 22P02: invalid input syntax for type bigint: "NIL"
+CONTEXT: COPY player, line 1, column height: "NIL"
+2025-07-09T23:57:04.768734Z ERROR The value #<BOGUS object @ #x30202C3AE50D> is not of the expected type MACPTR.
+2025-07-09T23:57:21.315064Z ERROR PostgreSQL Database error 23503: insert or update on table "player_attributes" violates foreign key constraint "player_attributes_player_api_id_fkey"
+DETAIL: Key (player_api_id)=(505942) is not present in table "player".
+QUERY: ALTER TABLE player_attributes ADD FOREIGN KEY(player_api_id) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:57:21.316271Z ERROR PostgreSQL Database error 23503: insert or update on table "player_attributes" violates foreign key constraint "player_attributes_player_fifa_api_id_fkey"
+DETAIL: Key (player_fifa_api_id)=(218353) is not present in table "player".
+QUERY: ALTER TABLE player_attributes ADD FOREIGN KEY(player_fifa_api_id) REFERENCES player(player_fifa_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:57:21.317691Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_11_fkey"
+DETAIL: Key (away_player_11)=(46552) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_11) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:57:21.319044Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_10_fkey"
+DETAIL: Key (away_player_10)=(38383) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_10) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:57:21.320459Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_9_fkey"
+DETAIL: Key (away_player_9)=(106013) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_9) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:57:21.322007Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_8_fkey"
+DETAIL: Key (away_player_8)=(38253) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_8) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:57:21.323444Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_7_fkey"
+DETAIL: Key (away_player_7)=(30949) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_7) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:57:21.325020Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_6_fkey"
+DETAIL: Key (away_player_6)=(38798) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_6) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:57:21.326611Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_5_fkey"
+DETAIL: Key (away_player_5)=(38389) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_5) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:57:21.328512Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_4_fkey"
+DETAIL: Key (away_player_4)=(13423) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_4) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:57:21.330111Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_3_fkey"
+DETAIL: Key (away_player_3)=(26458) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_3) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:57:21.331521Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_2_fkey"
+DETAIL: Key (away_player_2)=(38388) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_2) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:57:21.333278Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_1_fkey"
+DETAIL: Key (away_player_1)=(34480) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_1) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:57:21.335178Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_11_fkey"
+DETAIL: Key (home_player_11)=(94289) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_11) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:57:21.337025Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_10_fkey"
+DETAIL: Key (home_player_10)=(38801) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_10) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:57:21.338642Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_9_fkey"
+DETAIL: Key (home_player_9)=(26916) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_9) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:57:21.340610Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_8_fkey"
+DETAIL: Key (home_player_8)=(67898) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_8) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:57:21.343239Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_7_fkey"
+DETAIL: Key (home_player_7)=(148286) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_7) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:57:21.345096Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_6_fkey"
+DETAIL: Key (home_player_6)=(36393) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_6) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:57:21.348438Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_5_fkey"
+DETAIL: Key (home_player_5)=(26235) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_5) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:57:21.349952Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_4_fkey"
+DETAIL: Key (home_player_4)=(38312) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_4) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:57:21.351375Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_3_fkey"
+DETAIL: Key (home_player_3)=(38788) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_3) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:57:21.352847Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_2_fkey"
+DETAIL: Key (home_player_2)=(67950) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_2) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:57:21.354672Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_1_fkey"
+DETAIL: Key (home_player_1)=(39890) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_1) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:57:21.376809Z ERROR PostgreSQL Database error 42830: there is no unique constraint matching given keys for referenced table "team"
+QUERY: ALTER TABLE team_attributes ADD FOREIGN KEY(team_fifa_api_id) REFERENCES team(team_fifa_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-09T23:57:21.380808Z LOG report summary reset
+             table name     errors       rows      bytes      total time
+-----------------------  ---------  ---------  ---------  --------------
+                  fetch          0          0                     0.000s
+            before load          0          2                     0.262s
+        fetch meta data          0         49                     0.011s
+         Create Schemas          0          0                     0.001s
+       Create SQL Types          0          0                     0.001s
+          Create tables          0         14                     0.029s
+         Set Table OIDs          0          7                     0.001s
+-----------------------  ---------  ---------  ---------  --------------
+      player_attributes          0     183978    28.3 MB         26.404s
+                 player          1          0                     1.508s
+                  match          1      12986   190.3 MB         23.001s
+                 league          0         11     0.3 kB          0.827s
+                country          0         11     0.1 kB          1.920s
+                   team          0        299     9.6 kB          1.931s
+        team_attributes          0       1458   211.4 kB          1.854s
+-----------------------  ---------  ---------  ---------  --------------
+COPY Threads Completion          0          4                    26.395s
+         Create Indexes          0         13                     0.187s
+ Index Build Completion          0         13                     0.419s
+        Reset Sequences          0          7                     0.322s
+           Primary Keys          0          7                     0.018s
+    Create Foreign Keys         25          4                     0.064s
+        Create Triggers          0          0                     0.000s
+       Install Comments          0          0                     0.000s
+-----------------------  ---------  ---------  ---------  --------------
+      Total import time          2     198743   218.7 MB         27.405s
+pgloader
+Total reclaimed space: 0B
+ccl.latest: Pulling from dimitri/pgloader
+Digest: sha256:f6ab423661145fe71be3edec2cec4341facc88c5ce52d755a2d6f3ae73614c0b
+Status: Image is up to date for dimitri/pgloader:ccl.latest
+docker.io/dimitri/pgloader:ccl.latest
+e9245f7a64862c1f474b3676ac5569dbbf916eb1a07cd7f2a9c0846b615f6ff0
+2025-07-10T00:07:51.001527Z LOG pgloader version "3.6.7~devel"
+KABOOM!
+ESRAP-PARSE-ERROR: At
+
+  CAST
+    column match.home_player_1 to bigint using null-if(''),
+  
+                                                      ^ (Line 10, Column 52, Position 293)
+
+In context COMMAND:While parsing COMMAND. Problem:  The production
+                                                    
+                                                      #\(
+                                                    
+                                                    does not satisfy the predicate PGLOADER.PARSER::FUNCTION-NAME-CHARACTER-P.Expected:     the character Tab  or the character Newline  or the character Return  or the character Space  or the character ,  or the string "--"  or the string "/*"  or the character :  or the string "::"  or the character ;  or the string "after"  or the string "alter"  or the string "before"  or the string "cast"  or the string "excluding"  or the string "including"  or the string "set"  or the string "with"  or any character satisfying FUNCTION-NAME-CHARACTER-P
+An unhandled error condition has been signalled: At
+
+  CAST
+    column match.home_player_1 to bigint using null-if(''),
+  
+                                                      ^ (Line 10, Column 52, Position 293)
+
+In context COMMAND:While parsing COMMAND. Problem:  The production
+                                                    
+                                                      #\(
+                                                    
+                                                    does not satisfy the predicate PGLOADER.PARSER::FUNCTION-NAME-CHARACTER-P.Expected:     the character Tab  or the character Newline  or the character Return  or the character Space  or the character ,  or the string "--"  or the string "/*"  or the character :  or the string "::"  or the character ;  or the string "after"  or the string "alter"  or the string "before"  or the string "cast"  or the string "excluding"  or the string "including"  or the string "set"  or the string "with"  or any character satisfying FUNCTION-NAME-CHARACTER-P
+
+
+
+
+What I am doing here?
+
+At
+
+  CAST
+    column match.home_player_1 to bigint using null-if(''),
+  
+                                                      ^ (Line 10, Column 52, Position 293)
+
+In context COMMAND:While parsing COMMAND. Problem:  The production
+                                                    
+                                                      #\(
+                                                    
+                                                    does not satisfy the predicate PGLOADER.PARSER::FUNCTION-NAME-CHARACTER-P.Expected:     the character Tab  or the character Newline  or the character Return  or the character Space  or the character ,  or the string "--"  or the string "/*"  or the character :  or the string "::"  or the character ;  or the string "after"  or the string "alter"  or the string "before"  or the string "cast"  or the string "excluding"  or the string "including"  or the string "set"  or the string "with"  or any character satisfying FUNCTION-NAME-CHARACTER-P
+
+pgloader
+Total reclaimed space: 0B
+ccl.latest: Pulling from dimitri/pgloader
+Digest: sha256:f6ab423661145fe71be3edec2cec4341facc88c5ce52d755a2d6f3ae73614c0b
+Status: Image is up to date for dimitri/pgloader:ccl.latest
+docker.io/dimitri/pgloader:ccl.latest
+baff398cdc921e406d58ca1d0462902256ee5cd6828a7abc402ec31e0ba27ac0
+2025-07-10T00:08:45.001368Z LOG pgloader version "3.6.7~devel"
+2025-07-10T00:08:45.540708Z LOG Migrating from #<SQLITE-CONNECTION sqlite:///data/base.sqlite #x30200209213D>
+2025-07-10T00:08:45.540967Z LOG Migrating into #<PGSQL-CONNECTION pgsql://postgres@localhost:15432/postgres #x302002091FED>
+2025-07-10T00:08:47.446826Z ERROR Database error 22P02: invalid input syntax for type bigint: "NIL"
+CONTEXT: COPY player, line 1, column height: "NIL"
+2025-07-10T00:09:18.853672Z ERROR PostgreSQL Database error 23503: insert or update on table "player_attributes" violates foreign key constraint "player_attributes_player_api_id_fkey"
+DETAIL: Key (player_api_id)=(505942) is not present in table "player".
+QUERY: ALTER TABLE player_attributes ADD FOREIGN KEY(player_api_id) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-10T00:09:18.854718Z ERROR PostgreSQL Database error 23503: insert or update on table "player_attributes" violates foreign key constraint "player_attributes_player_fifa_api_id_fkey"
+DETAIL: Key (player_fifa_api_id)=(218353) is not present in table "player".
+QUERY: ALTER TABLE player_attributes ADD FOREIGN KEY(player_fifa_api_id) REFERENCES player(player_fifa_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-10T00:09:18.856350Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_11_fkey"
+DETAIL: Key (away_player_11)=(431589) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_11) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-10T00:09:18.857730Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_10_fkey"
+DETAIL: Key (away_player_10)=(150240) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_10) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-10T00:09:18.860207Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_9_fkey"
+DETAIL: Key (away_player_9)=(209855) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_9) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-10T00:09:18.862881Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_8_fkey"
+DETAIL: Key (away_player_8)=(497572) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_8) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-10T00:09:18.865585Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_7_fkey"
+DETAIL: Key (away_player_7)=(41463) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_7) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-10T00:09:18.867946Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_6_fkey"
+DETAIL: Key (away_player_6)=(190854) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_6) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-10T00:09:18.870927Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_5_fkey"
+DETAIL: Key (away_player_5)=(37889) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_5) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-10T00:09:18.872967Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_4_fkey"
+DETAIL: Key (away_player_4)=(466443) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_4) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-10T00:09:18.874703Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_3_fkey"
+DETAIL: Key (away_player_3)=(202471) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_3) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-10T00:09:18.876716Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_2_fkey"
+DETAIL: Key (away_player_2)=(38789) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_2) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-10T00:09:18.879344Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_1_fkey"
+DETAIL: Key (away_player_1)=(67949) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_1) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-10T00:09:18.881737Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_11_fkey"
+DETAIL: Key (home_player_11)=(38323) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_11) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-10T00:09:18.883898Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_10_fkey"
+DETAIL: Key (home_player_10)=(68120) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_10) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-10T00:09:18.885905Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_9_fkey"
+DETAIL: Key (home_player_9)=(512734) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_9) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-10T00:09:18.889139Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_8_fkey"
+DETAIL: Key (home_player_8)=(212863) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_8) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-10T00:09:18.891063Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_7_fkey"
+DETAIL: Key (home_player_7)=(209782) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_7) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-10T00:09:18.892883Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_6_fkey"
+DETAIL: Key (home_player_6)=(67957) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_6) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-10T00:09:18.894483Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_5_fkey"
+DETAIL: Key (home_player_5)=(201804) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_5) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-10T00:09:18.897642Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_4_fkey"
+DETAIL: Key (home_player_4)=(306731) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_4) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-10T00:09:18.899930Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_3_fkey"
+DETAIL: Key (home_player_3)=(37965) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_3) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-10T00:09:18.902161Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_2_fkey"
+DETAIL: Key (home_player_2)=(179241) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_2) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-10T00:09:18.905867Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_1_fkey"
+DETAIL: Key (home_player_1)=(346114) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_1) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-10T00:09:18.972748Z ERROR PostgreSQL Database error 42830: there is no unique constraint matching given keys for referenced table "team"
+QUERY: ALTER TABLE team_attributes ADD FOREIGN KEY(team_fifa_api_id) REFERENCES team(team_fifa_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-10T00:09:18.981833Z LOG report summary reset
+             table name     errors       rows      bytes      total time
+-----------------------  ---------  ---------  ---------  --------------
+                  fetch          0          0                     0.000s
+            before load          0          2                     0.280s
+        fetch meta data          0         49                     0.010s
+         Create Schemas          0          0                     0.000s
+       Create SQL Types          0          0                     0.000s
+          Create tables          0         14                     0.025s
+         Set Table OIDs          0          7                     0.001s
+-----------------------  ---------  ---------  ---------  --------------
+      player_attributes          0     183978    28.3 MB         30.699s
+                 player          1          0                     1.682s
+                  match          0      25979   267.0 MB         31.743s
+                 league          0         11     0.3 kB          0.602s
+                country          0         11     0.1 kB          1.925s
+                   team          0        299     9.6 kB          2.085s
+        team_attributes          0       1458   211.4 kB          1.851s
+-----------------------  ---------  ---------  ---------  --------------
+COPY Threads Completion          0          4                    31.813s
+         Create Indexes          0         13                     0.325s
+ Index Build Completion          0         13                     0.602s
+        Reset Sequences          0          7                     0.288s
+           Primary Keys          0          7                     0.007s
+    Create Foreign Keys         25          4                     0.121s
+        Create Triggers          0          0                     0.000s
+       Install Comments          0          0                     0.000s
+-----------------------  ---------  ---------  ---------  --------------
+      Total import time          1     211736   295.5 MB         33.155s
+pgloader
+Total reclaimed space: 0B
+ccl.latest: Pulling from dimitri/pgloader
+Digest: sha256:f6ab423661145fe71be3edec2cec4341facc88c5ce52d755a2d6f3ae73614c0b
+Status: Image is up to date for dimitri/pgloader:ccl.latest
+docker.io/dimitri/pgloader:ccl.latest
+35f11b2e2ec7f3bcb8b195ab6500695e6ad83e77231d0decdbf020e5726cc08a
+2025-07-10T00:25:42.005297Z LOG pgloader version "3.6.7~devel"
+2025-07-10T00:25:42.569994Z LOG Migrating from #<SQLITE-CONNECTION sqlite:///data/base.sqlite #x30200209213D>
+2025-07-10T00:25:42.570390Z LOG Migrating into #<PGSQL-CONNECTION pgsql://postgres@localhost:15432/postgres #x302002091FED>
+2025-07-10T00:25:44.543824Z ERROR Database error 22P02: invalid input syntax for type bigint: "NIL"
+CONTEXT: COPY player, line 1, column height: "NIL"
+2025-07-10T00:25:54.634374Z ERROR A thread failed with error: Database error: Connection to database server lost.
+2025-07-10T00:25:54.648523Z ERROR Date/time: 2025-07-10-00:25!
+An unhandled error condition has been signalled: Database error: Connection to database server lost.
+
+
+ (7FD86E2E05B0) : 0 (PRINT-CALL-HISTORY :CONTEXT NIL :PROCESS NIL :ORIGIN NIL :DETAILED-P NIL :COUNT 1152921504606846975 :START-FRAME-NUMBER 0 :STREAM #<STRING-OUTPUT-STREAM  #x30203225DDED> :PRINT-LEVEL 2 :PRINT-LENGTH 5 :PRINT-STRING-LENGTH :DEFAULT :SHOW-INTERNAL-FRAMES NIL :FORMAT :TRADITIONAL) 965
+ (7FD86E2E0748) : 1 (PRINT-BACKTRACE-TO-STREAM #<STRING-OUTPUT-STREAM  #x30203225DDED>) 85
+ (7FD86E2E0778) : 2 (PRINT-BACKTRACE #<CL-POSTGRES:DATABASE-CONNECTION-LOST #x30203225E27D> :OUTPUT NIL :IF-EXISTS :APPEND :VERBOSE NIL) 845
+ (7FD86E2E0800) : 3 (FUNCALL #'#<(:INTERNAL (PGLOADER.LOAD:COPY-FROM (PGLOADER.SOURCES:COPY)))> #<CL-POSTGRES:DATABASE-CONNECTION-LOST #x30203225E27D>) 197
+ (7FD86E2E0828) : 4 (CONDITION-HANDLER #<CL-POSTGRES:DATABASE-CONNECTION-LOST #x30203225E27D>) 533
+ (7FD86E2E0898) : 5 (SIGNAL #<CL-POSTGRES:DATABASE-CONNECTION-LOST #x30203225E27D>) 1037
+ (7FD86E2E08E8) : 6 (%ERROR #<CL-POSTGRES:DATABASE-CONNECTION-LOST #x30203225E27D> NIL 17570942271778) 117
+ (7FD86E2E0910) : 7 (STREAM-ROWS-TO-COPY #S(PGLOADER.CATALOG:TABLE :SOURCE-NAME "Match" :NAME "match" ...) ("id" "country_id" "league_id" "season" "stage" ...) #<PGLOADER.SOURCE.SQLITE:COPY-SQLITE #x30200218BB3D> 115 #S(LPARALLEL.VECTOR-QUEUE:VECTOR-QUEUE :IMPL #S(LPARALLEL.VECTOR-QUEUE::RAW-QUEUE :DATA # :START 2992 ...) :LOCK #<RECURSIVE-LOCK "Anonymous lock" [ptr @ #x7FD868055CC0] #x30200218FFBD> ...) #<CL-POSTGRES:DATABASE-CONNECTION #x302005C390CD>) 1845
+ (7FD86E2E0980) : 8 (COPY-ROWS-FROM-QUEUE #<PGLOADER.SOURCE.SQLITE:COPY-SQLITE #x30200218BB3D> #S(LPARALLEL.VECTOR-QUEUE:VECTOR-QUEUE :IMPL #S(LPARALLEL.VECTOR-QUEUE::RAW-QUEUE :DATA # :START 2992 ...) :LOCK #<RECURSIVE-LOCK "Anonymous lock" [ptr @ #x7FD868055CC0] #x30200218FFBD> ...) :DISABLE-TRIGGERS NIL :ON-ERROR-STOP T :COLUMNS ("id" "country_id" "league_id" "season" "stage" ...)) 3605
+ (7FD86E2E0AB0) : 9 (FUNCALL #'#<(:INTERNAL #:BODY-FN125094 LPARALLEL.KERNEL::MAKE-CHANNELED-TASK)>) 245
+ (7FD86E2E0B18) : 10 (FUNCALL #'#<(:INTERNAL LPARALLEL.KERNEL::MAKE-CHANNELED-TASK)>) 125
+ (7FD86E2E0B68) : 11 (EXEC-TASK/WORKER (#<COMPILED-LEXICAL-CLOSURE # #x30200218FE2F> . :DEFAULT) #S(LPARALLEL.KERNEL::WORKER :HANDSHAKE/FROM-WORKER #S(LPARALLEL.CONS-QUEUE:CONS-QUEUE :IMPL # :LOCK #<# # [ptr @ #x7FD868002340] #x30200209E12D> ...) :HANDSHAKE/TO-WORKER #S(LPARALLEL.CONS-QUEUE:CONS-QUEUE :IMPL # :LOCK #<# # [ptr @ #x7FD8680023C0] #x30200209E05D> ...) ...)) 205
+ (7FD86E2E0BD0) : 12 (WORKER-LOOP #<KERNEL :NAME "lparallel" :WORKER-COUNT 4 :USE-CALLER NIL :ALIVE T #x30200209F8AD> #S(LPARALLEL.KERNEL::WORKER :HANDSHAKE/FROM-WORKER #S(LPARALLEL.CONS-QUEUE:CONS-QUEUE :IMPL # :LOCK #<# # [ptr @ #x7FD868002340] #x30200209E12D> ...) :HANDSHAKE/TO-WORKER #S(LPARALLEL.CONS-QUEUE:CONS-QUEUE :IMPL # :LOCK #<# # [ptr @ #x7FD8680023C0] #x30200209E05D> ...) ...)) 237
+ (7FD86E2E0C38) : 13 (%CALL-WITH-TASK-HANDLER #<COMPILED-LEXICAL-CLOSURE (:INTERNAL LPARALLEL.KERNEL::ENTER-WORKER-LOOP) #x3020020A1AEF>) 789
+ (7FD86E2E0CE0) : 14 (FUNCALL #'#<(:INTERNAL LPARALLEL.KERNEL::CALL-WITH-WORKER-CONTEXT)>) 917
+ (7FD86E2E0D50) : 15 (FUNCALL #<COMPILED-LEXICAL-CLOSURE (:INTERNAL LPARALLEL.KERNEL::CALL-WITH-WORKER-CONTEXT) #x3020020A1A9F>) 149
+ (7FD86E2E0D80) : 16 (CALL-WITH-WORKER-CONTEXT #<COMPILED-LEXICAL-CLOSURE (:INTERNAL LPARALLEL.KERNEL::ENTER-WORKER-LOOP) #x3020020A1AEF> #<Compiled-function FUNCALL #x30000007ECDF> #<KERNEL :NAME "lparallel" :WORKER-COUNT 4 :USE-CALLER NIL :ALIVE T #x30200209F8AD> #S(LPARALLEL.KERNEL::WORKER :HANDSHAKE/FROM-WORKER #S(LPARALLEL.CONS-QUEUE:CONS-QUEUE :IMPL # :LOCK #<# # [ptr @ #x7FD868002340] #x30200209E12D> ...) :HANDSHAKE/TO-WORKER #S(LPARALLEL.CONS-QUEUE:CONS-QUEUE :IMPL # :LOCK #<# # [ptr @ #x7FD8680023C0] #x30200209E05D> ...) ...)) 341
+ (7FD86E2E0DE8) : 17 (FUNCALL #'#<(:INTERNAL LPARALLEL.KERNEL::MAKE-WORKER-THREAD)>) 157
+ (7FD86E2E0E40) : 18 (FUNCALL #'#<(:INTERNAL BORDEAUX-THREADS::BINDING-DEFAULT-SPECIALS)>) 845
+ (7FD86E2E0E68) : 19 (RUN-PROCESS-INITIAL-FORM #<PROCESS lparallel(8) [Active] #x30200209D8FD> (#<COMPILED-LEXICAL-CLOSURE # #x30200209D68F>)) 717
+ (7FD86E2E0EF0) : 20 (FUNCALL #'#<(:INTERNAL (CCL::%PROCESS-PRESET-INTERNAL (PROCESS)))> #<PROCESS lparallel(8) [Active] #x30200209D8FD> (#<COMPILED-LEXICAL-CLOSURE # #x30200209D68F>)) 581
+ (7FD86E2E0F98) : 21 (FUNCALL #'#<(:INTERNAL CCL::THREAD-MAKE-STARTUP-FUNCTION)>) 277
+KABOOM!
+DATABASE-CONNECTION-LOST: Database error: Connection to database server lost.
+An unhandled error condition has been signalled: Database error: Connection to database server lost.
+
+
+
+
+What I am doing here?
+
+Database error: Connection to database server lost.
+
+pgloader
+Total reclaimed space: 0B
+ccl.latest: Pulling from dimitri/pgloader
+Digest: sha256:f6ab423661145fe71be3edec2cec4341facc88c5ce52d755a2d6f3ae73614c0b
+Status: Image is up to date for dimitri/pgloader:ccl.latest
+docker.io/dimitri/pgloader:ccl.latest
+741f25feeeffee815a5e7fd18c806f660cf5c112d63314f92d3665a4a052d249
+2025-07-10T00:30:45.000915Z LOG pgloader version "3.6.7~devel"
+2025-07-10T00:30:45.515494Z LOG Migrating from #<SQLITE-CONNECTION sqlite:///data/base.sqlite #x3020020921AD>
+2025-07-10T00:30:45.515912Z LOG Migrating into #<PGSQL-CONNECTION pgsql://postgres@localhost:15432/postgres #x30200209205D>
+2025-07-10T00:30:53.429808Z ERROR The value #<BOGUS object @ #x30202AE7836D> is not of the expected type MACPTR.
+2025-07-10T00:31:11.357861Z ERROR PostgreSQL Database error 23503: insert or update on table "player_attributes" violates foreign key constraint "player_attributes_player_fifa_api_id_fkey"
+DETAIL: Key (player_fifa_api_id)=(200529) is not present in table "player".
+QUERY: ALTER TABLE player_attributes ADD FOREIGN KEY(player_fifa_api_id) REFERENCES player(player_fifa_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-10T00:31:11.361315Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_11_fkey"
+DETAIL: Key (away_player_11)=(0) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_11) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-10T00:31:11.364846Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_10_fkey"
+DETAIL: Key (away_player_10)=(0) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_10) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-10T00:31:11.368495Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_9_fkey"
+DETAIL: Key (away_player_9)=(0) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_9) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-10T00:31:11.372289Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_8_fkey"
+DETAIL: Key (away_player_8)=(0) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_8) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-10T00:31:11.375875Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_7_fkey"
+DETAIL: Key (away_player_7)=(0) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_7) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-10T00:31:11.379408Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_6_fkey"
+DETAIL: Key (away_player_6)=(0) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_6) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-10T00:31:11.385020Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_5_fkey"
+DETAIL: Key (away_player_5)=(0) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_5) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-10T00:31:11.388357Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_4_fkey"
+DETAIL: Key (away_player_4)=(0) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_4) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-10T00:31:11.392342Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_3_fkey"
+DETAIL: Key (away_player_3)=(0) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_3) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-10T00:31:11.395529Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_2_fkey"
+DETAIL: Key (away_player_2)=(0) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_2) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-10T00:31:11.398769Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_away_player_1_fkey"
+DETAIL: Key (away_player_1)=(0) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(away_player_1) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-10T00:31:11.402293Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_11_fkey"
+DETAIL: Key (home_player_11)=(0) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_11) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-10T00:31:11.405991Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_10_fkey"
+DETAIL: Key (home_player_10)=(0) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_10) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-10T00:31:11.410297Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_9_fkey"
+DETAIL: Key (home_player_9)=(0) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_9) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-10T00:31:11.413415Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_8_fkey"
+DETAIL: Key (home_player_8)=(0) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_8) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-10T00:31:11.416649Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_7_fkey"
+DETAIL: Key (home_player_7)=(0) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_7) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-10T00:31:11.429785Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_6_fkey"
+DETAIL: Key (home_player_6)=(0) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_6) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-10T00:31:11.433520Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_5_fkey"
+DETAIL: Key (home_player_5)=(0) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_5) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-10T00:31:11.437009Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_4_fkey"
+DETAIL: Key (home_player_4)=(0) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_4) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-10T00:31:11.441378Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_3_fkey"
+DETAIL: Key (home_player_3)=(0) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_3) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-10T00:31:11.444804Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_2_fkey"
+DETAIL: Key (home_player_2)=(0) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_2) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-10T00:31:11.449398Z ERROR PostgreSQL Database error 23503: insert or update on table "match" violates foreign key constraint "match_home_player_1_fkey"
+DETAIL: Key (home_player_1)=(0) is not present in table "player".
+QUERY: ALTER TABLE match ADD FOREIGN KEY(home_player_1) REFERENCES player(player_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-10T00:31:11.467180Z ERROR PostgreSQL Database error 42830: there is no unique constraint matching given keys for referenced table "team"
+QUERY: ALTER TABLE team_attributes ADD FOREIGN KEY(team_fifa_api_id) REFERENCES team(team_fifa_api_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+2025-07-10T00:31:11.469710Z LOG report summary reset
+             table name     errors       rows      bytes      total time
+-----------------------  ---------  ---------  ---------  --------------
+                  fetch          0          0                     0.000s
+            before load          0          2                     0.256s
+        fetch meta data          0         49                     0.009s
+         Create Schemas          0          0                     0.000s
+       Create SQL Types          0          0                     0.001s
+          Create tables          0         14                     0.025s
+         Set Table OIDs          0          7                     0.001s
+-----------------------  ---------  ---------  ---------  --------------
+      player_attributes          0     183978    28.3 MB         24.452s
+                 player          0      11060   657.8 kB          2.123s
+                  match          1      10904   157.8 MB         19.342s
+                 league          0         11     0.3 kB          0.681s
+                country          0         11     0.1 kB          2.679s
+                   team          0        299     9.6 kB          2.396s
+        team_attributes          0       1458   211.4 kB          2.478s
+-----------------------  ---------  ---------  ---------  --------------
+COPY Threads Completion          0          4                    24.445s
+         Create Indexes          0         13                     0.296s
+ Index Build Completion          0         13                     0.492s
+        Reset Sequences          0          7                     0.269s
+           Primary Keys          0          7                     0.012s
+    Create Foreign Keys         24          5                     0.177s
+        Create Triggers          0          0                     0.000s
+       Install Comments          0          0                     0.000s
+-----------------------  ---------  ---------  ---------  --------------
+      Total import time          1     207721   186.9 MB         25.691s
+pgloader
+Total reclaimed space: 0B
