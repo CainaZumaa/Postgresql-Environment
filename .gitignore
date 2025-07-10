@@ -30,3 +30,6 @@ airflow/dags/*
 !airflow/dockerfile
 !airflow/requirements.txt
 airflow/dbt/dbt_internal_packages/*
+
+.env
+Postgresql-Environment/pgloader/base.sqlite
