@@ -21,3 +21,7 @@ O banco contém 12 tabelas normalizadas com dados de:
 - Partidas e eventos
 - Temporadas e ligas
 - Odds de apostas 
+
+## Docker compose (subir 1 parte)
+
+docker compose up -d maquina1 maquina2 maquina3 dw grafana postgresql-exporter
