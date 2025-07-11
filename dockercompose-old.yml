@@ -242,8 +242,6 @@ services:
     command: api-server
     ports:
       - "8080:8080"
-    environment:
-      - AIRFLOW__API_AUTH__JWT_SECRET=segredinho
     healthcheck:
       test: ["CMD", "curl", "--fail", "http://localhost:8080/api/v2/version"]
       interval: 30s
@@ -443,6 +441,7 @@ services:
         echo "Files in shared volumes:"
         echo
         ls -la /opt/airflow/{logs,dags,plugins,config}
+
     environment:
       <<: *airflow-common-env
       _AIRFLOW_DB_MIGRATE: 'true'
@@ -498,21 +497,6 @@ services:
       rede:
         ipv4_address: 110.0.0.126
 
-  pgadmin:
-    image: dpage/pgadmin4
-    container_name: meu_pgadmin
-    restart: unless-stopped
-    environment:
-      PGADMIN_DEFAULT_EMAIL: admin@admin.com
-      PGADMIN_DEFAULT_PASSWORD: root
-    ports:
-      - "8585:80"
-    volumes:
-      - pgadmin-data:/var/lib/pgadmin
-    networks:
-      rede:
-        ipv4_address: 110.0.0.130
-
 networks:
   rede:
     name: rede
@@ -537,6 +521,4 @@ volumes:
     driver: local
   grafana-data:
     name: grafana-data
-    driver: local
-  pgadmin-data:
     driver: local
