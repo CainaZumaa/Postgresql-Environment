@@ -30,3 +30,5 @@ docker compose up -d maquina1 maquina2 maquina3 dw grafana postgresql-exporter
 -> corno job (pegar scripts da tabelas normalizadas) -> sql dentro da maquina1
 -> dentro da pasta dw -> fazer o ddl do star schema
 -> dentro da pasta airflow, definir as models pra realizar o processo de elt na maquina1 pro dw
+
+-> mostrar backup, restauração, monitoramento (query pesada)
