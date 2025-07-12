@@ -1,5 +1,4 @@
-# Ambiente PostgreSQL automatizado
-
+# Ambiente PostgreSQL automatizado!
 
 Este projeto levanta um ambiente completo com:
 
@@ -18,13 +17,13 @@ Este projeto levanta um ambiente completo com:
 
 ## 🚀 Serviços incluídos
 
-| Serviço              | Descrição                                                    |
-|----------------------|--------------------------------------------------------------|
-| `maquina1`           | PostgreSQL 17 com SSH habilitado                             |
-| `maquina2`           | Ubuntu com pgBackRest configurado para backups remotos       |
-| `postgres_exporter`  | Exportador de métricas para o Prometheus                     |
-| `prometheus`         | Coletor de métricas                                          |
-| `grafana`            | Dashboard para visualização dos dados                        |
+| Serviço             | Descrição                                              |
+| ------------------- | ------------------------------------------------------ |
+| `maquina1`          | PostgreSQL 17 com SSH habilitado                       |
+| `maquina2`          | Ubuntu com pgBackRest configurado para backups remotos |
+| `postgres_exporter` | Exportador de métricas para o Prometheus               |
+| `prometheus`        | Coletor de métricas                                    |
+| `grafana`           | Dashboard para visualização dos dados                  |
 
 ---
 
@@ -113,17 +112,17 @@ Abre um shell interativo no container `maquina2` como usuário `postgres`.
 
 ## 📈 Monitoramento
 
-* A exportação de métricas do PostgreSQL é feita via [`postgres_exporter`](https://github.com/prometheus-community/postgres_exporter).
-* O Prometheus coleta e armazena as métricas.
-* O Grafana exibe as métricas em dashboards interativos.
+- A exportação de métricas do PostgreSQL é feita via [`postgres_exporter`](https://github.com/prometheus-community/postgres_exporter).
+- O Prometheus coleta e armazena as métricas.
+- O Grafana exibe as métricas em dashboards interativos.
 
 ---
 
 ## 💾 Backup com pgBackRest
 
-* O `pgBackRest` é instalado no container `maquina2` (Ubuntu).
-* A comunicação entre os servidores é feita via SSH.
-* O script `cpKeys` cuida da geração e troca de chaves públicas.
+- O `pgBackRest` é instalado no container `maquina2` (Ubuntu).
+- A comunicação entre os servidores é feita via SSH.
+- O script `cpKeys` cuida da geração e troca de chaves públicas.
 
 ---
 
@@ -144,7 +143,6 @@ Abre um shell interativo no container `maquina2` como usuário `postgres`.
    ```
 
    para criar pasta dedicada para o backup no servidor de backup `maquina2`.
-
 
 3. Execute:
 
@@ -186,7 +184,7 @@ Abre um shell interativo no container `maquina2` como usuário `postgres`.
 
    ⚠️ **Atenção:** Para ver os arquivos é necessários executar o comando para ter permissão. sudo chmod 777 ./ -R
 
-8. Verifique os logs do PostgreSQL se houver falhas no `pgBackRest`:
+7. Verifique os logs do PostgreSQL se houver falhas no `pgBackRest`:
 
    ```bash
    docker exec maquina1 tail -f /var/lib/postgresql/log/postgresql.log
@@ -198,11 +196,10 @@ Abre um shell interativo no container `maquina2` como usuário `postgres`.
 
 1. Acesse o Grafana em: [http://localhost:3000](http://localhost:4000)
 
-   * Usuário padrão: `admin`
-   * Senha padrão: `senha`
+   - Usuário padrão: `admin`
+   - Senha padrão: `senha`
 
    exemplo de dash: https://grafana.com/grafana/dashboards/9628-postgresql-database/
-
 
 ## 📂➡️📤 Processo de carga de dados pelo pgloader
 
